@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A to Z Packers & Movers - Complete Moving Solutions with Live Tracking</title>
+    <meta name="description" content="Professional packers and movers in Odisha since 2005. Live tracking, cost calculator, and admin panel. Complete coverage of all 30 districts and every PIN code in India.">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #1f2937; overflow-x: hidden; }
+
+        /* Professional Color Scheme */
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-orange: #f59e0b;
+            --success-green: #059669;
+            --text-dark: #1f2937;
+            --text-gray: #6b7280;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Loading Animation */
+        .loading-screen { position: fixed; inset: 0; width: 100%; height: 100%; background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.5s ease; }
+        .loading-screen.hide { opacity: 0; pointer-events: none; }
+        .loader { width: 60px; height: 60px; border: 4px solid rgba(255,255,255,0.3); border-top: 4px solid #fff; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loading-text { color: #fff; font-size: 1.2rem; font-weight: 600; text-align: center; }
+        .loading-subtitle { font-size: 0.875rem; opacity: 0.9; margin-top: 0.5rem; }
+
+        /* Header */
+        .header { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(229, 231, 235, 0.8); box-shadow: var(--shadow);
+            position: sticky; top: 0; z-index: 50; transition: all 0.3s ease; }
+        .header.scrolled { background: rgba(255, 255, 255, 0.95); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12); }
+        .header-content { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 90px; }
+        .logo { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+        .logo-icon { width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.875rem; box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3); transition: transform 0.3s ease; }
+        .logo-icon:hover { transform: scale(1.05); }
+        .logo-text h1 { font-size: 1.65rem; font-weight: 800; color: var(--text-dark); margin: 0; line-height: 1.1; }
+        .logo-text p { font-size: 0.875rem; color: var(--secondary-blue); font-weight: 600; margin: 0; line-height: 1.1; }
+        .nav { display: flex; align-items: center; gap: 2rem; }
+        .nav-links { display: flex; align-items: center; gap: 0.5rem; }
+        .nav-link { color: var(--text-gray); text-decoration: none; font-weight: 600; font-size: 1rem; padding: 0.875rem 1.5rem; border-radius: 12px; transition: all 0.3s ease; position: relative; }
+        .nav-link:hover, .nav-link.active { color: var(--secondary-blue); background: rgba(59, 130, 246, 0.1); transform: translateY(-1px); }
+        .nav-link.active::after { content: ''; position: absolute; bottom: 0.375rem; left: 50%; transform: translateX(-50%); width: 24px; height: 3px; background: var(--secondary-blue); border-radius: 2px; }
+        .cta-button { background: linear-gradient(135deg, var(--success-green), #047857); color: white; padding: 0.8rem 1.2rem; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.6rem; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(5, 150, 105, 0.25); }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(5, 150, 105, 0.35); background: linear-gradient(135deg, #047857, #065f46); }
+
+        /* Mobile Menu */
+        .mobile-menu-btn { display: none; background: var(--bg-light); border: 2px solid rgba(59, 130, 246, 0.2); border-radius: 8px; padding: 0.5rem; font-size: 1.25rem; color: var(--text-dark); cursor: pointer; transition: all 0.3s ease; }
+        .mobile-menu-btn:hover { background: rgba(59, 130, 246, 0.1); border-color: var(--secondary-blue); }
+        .mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; border-top: 1px solid #e5e7eb; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); padding: 1.5rem; z-index: 100; }
+        .mobile-menu.active { display: block; animation: slideDown 0.3s ease; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .mobile-nav-links { display: flex; flex-direction: column; gap: 0.75rem; }
+        .mobile-nav-links .nav-link { padding: 1rem 1.25rem; border-radius: 12px; font-size: 1rem; text-align: center; background: var(--bg-light); border: 1px solid rgba(229, 231, 235, 0.8); }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, rgba(30, 64, 175, 0.95), rgba(59, 130, 246, 0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="1200" height="600" fill="url(%23grid)"/></svg>');
+            min-height: 90vh; display: flex; align-items: center; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px);} 50% { transform: translateY(-20px);} }
+        .hero-content { max-width: 1200px; margin: 0 auto; padding: 0 2rem; text-align: center; position: relative; z-index: 2; }
+        .hero-title { font-size: clamp(2.3rem, 5vw, 4rem); font-weight: 800; color: white; margin-bottom: 1.5rem; text-shadow: 0 4px 20px rgba(0,0,0,0.3); line-height: 1.1; }
+        .hero-subtitle { font-size: clamp(1.05rem, 2.5vw, 1.35rem); color: rgba(255,255,255,0.95); margin-bottom: 2.2rem; font-weight: 500; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .hero-buttons { display: flex; flex-direction: column; gap: 1rem; align-items: center; margin-bottom: 3rem; }
+        @media (min-width: 640px){ .hero-buttons{ flex-direction: row; justify-content: center; gap: 1.2rem; } }
+
+        .btn-primary { background: linear-gradient(135deg, var(--accent-orange), #d97706); color: white; padding: 1rem 2rem; border-radius: 12px; font-weight: 600; font-size: 1.1rem; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(245, 158, 11, 0.4); }
+        .btn-secondary { background: transparent; color: white; padding: 1rem 2rem; border: 2px solid rgba(255,255,255,0.8); border-radius: 12px; font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .btn-secondary:hover { background: white; color: var(--primary-blue); transform: translateY(-2px); }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .stat-card { text-align: center; padding: 2rem 1.5rem; background: rgba(255,255,255,0.1); border-radius: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; }
+        .stat-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.15); }
+        .stat-number { font-size: 3rem; font-weight: 800; color: var(--accent-orange); text-shadow: 0 4px 15px rgba(0,0,0,0.3); display: block; margin-bottom: 0.5rem; }
+        .stat-label { color: white; font-weight: 600; font-size: 1.1rem; }
+
+        /* Sections */
+        .section { padding: 5rem 0; }
+        .section-alt { background: var(--bg-light); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-title { font-size: 2.3rem; font-weight: 700; color: var(--text-dark); margin-bottom: 1rem; }
+        .section-subtitle { color: var(--text-gray); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+
+        /* Card Styles */
+        .card { background: white; border-radius: 16px; padding: 2rem; box-shadow: var(--shadow); border: 1px solid rgba(229, 231, 235, 0.8); transition: all 0.3s ease; height: 100%; }
+        .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+        .card-icon { width: 4rem; height: 4rem; background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue)); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: white; font-size: 1.5rem; }
+        .card-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text-dark); }
+        .card-description { color: var(--text-gray); line-height: 1.6; }
+
+        /* Grid Layouts */
+        .grid { display: grid; gap: 2rem; }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+        /* Calculator */
+        .calculator-container { background: white; border-radius: 20px; padding: 3rem; box-shadow: var(--shadow-hover); border: 1px solid rgba(229,231,235,0.8); }
+        .calculator-form { display: grid; gap: 1.5rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .calculator-result { background: linear-gradient(135deg, var(--success-green), #047857); color: white; padding: 2rem; border-radius: 16px; text-align: center; margin-top: 2rem; display: none; }
+        .result-amount { font-size: 3rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .result-label { font-size: 1.1rem; opacity: 0.95; }
+
+        /* Tracking */
+        .tracking-container { background: white; border-radius: 20px; padding: 3rem; box-shadow: var(--shadow-hover); border: 1px solid rgba(229, 231, 235, 0.8); }
+        .tracking-input { display: flex; gap: 1rem; margin-bottom: 2rem; }
+        .tracking-input input { flex: 1; padding: 1rem; border: 2px solid #e5e7eb; border-radius: 12px; font-size: 1.05rem; }
+        .tracking-input button { background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue)); color: white; padding: 1rem 2rem; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .tracking-result { display: none; background: var(--bg-light); border-radius: 16px; padding: 2rem; margin-top: 2rem; }
+        .tracking-status { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+        .status-icon { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; }
+        .status-in-transit { background: linear-gradient(135deg, var(--accent-orange), #d97706); }
+        .status-delivered { background: linear-gradient(135deg, var(--success-green), #047857); }
+        .status-pending { background: linear-gradient(135deg, #9ca3af, #6b7280); }
+        .tracking-timeline { position: relative; padding-left: 2rem; }
+        .timeline-item { position: relative; padding-bottom: 2rem; border-left: 2px solid #e5e7eb; }
+        .timeline-item:last-child { border-left: none; }
+        .timeline-dot { position: absolute; left: -6px; top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--secondary-blue); }
+        .timeline-content { margin-left: 1.5rem; }
+        .timeline-time { color: var(--text-gray); font-size: 0.875rem; margin-bottom: 0.25rem; }
+        .timeline-title { font-weight: 600; color: var(--text-dark); margin-bottom: 0.25rem; }
+        .timeline-description { color: var(--text-gray); font-size: 0.9rem; }
+
+        /* Admin Panel */
+        .admin-panel { background: white; border-radius: 20px; padding: 3rem; box-shadow: var(--shadow-hover); border: 1px solid rgba(229, 231, 235, 0.8); }
+        .admin-login { max-width: 400px; margin: 0 auto; text-align: center; }
+        .admin-dashboard { display: none; }
+        .admin-tabs { display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 2px solid #e5e7eb; }
+        .admin-tab { padding: 1rem 2rem; background: none; border: none; font-weight: 600; color: var(--text-gray); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s ease; }
+        .admin-tab.active { color: var(--secondary-blue); border-bottom-color: var(--secondary-blue); }
+        .admin-content { display: none; }
+        .admin-content.active { display: block; }
+        .shipment-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .shipment-table th, .shipment-table td { padding: 1rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+        .shipment-table th { background: var(--bg-light); font-weight: 600; color: var(--text-dark); }
+        .status-badge { padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; font-weight: 600; }
+        .status-badge.status-pending { background: #f3f4f6; color: #374151; }
+        .status-badge.status-in-progress { background: #dbeafe; color: #1e40af; }
+        .status-badge.status-completed { background: #d1fae5; color: #065f46; }
+
+        /* Testimonials */
+        .testimonial-card { background: white; padding: 2rem; border-radius: 16px; box-shadow: var(--shadow); position: relative; transition: all 0.3s ease; }
+        .testimonial-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .testimonial-header { display: flex; align-items: center; margin-bottom: 1.5rem; }
+        .testimonial-avatar { width: 60px; height: 60px; background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.5rem; margin-right: 1rem; }
+        .testimonial-info h4 { font-weight: 700; color: var(--text-dark); margin-bottom: 0.25rem; }
+        .testimonial-info p { color: var(--text-gray); font-size: 0.9rem; }
+        .testimonial-rating { display: flex; gap: 0.25rem; margin-bottom: 1rem; }
+        .star { color: #fbbf24; font-size: 1.25rem; }
+        .testimonial-text { color: var(--text-gray); font-style: italic; line-height: 1.6; }
+
+        /* Contact Form */
+        .contact-form { background: white; padding: 3rem; border-radius: 20px; box-shadow: var(--shadow-hover); border: 1px solid rgba(229, 231, 235, 0.8); }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-label { display: block; font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; }
+        .form-input { width: 100%; padding: 0.875rem 1rem; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s ease; }
+        .form-input:focus { outline: none; border-color: var(--secondary-blue); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
+        .form-textarea { resize: vertical; min-height: 120px; }
+        .form-submit { background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue)); color: white; padding: 1rem 2rem; border: none; border-radius: 12px; font-size: 1.05rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%; }
+        .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(59,130,246,0.3); }
+
+        /* Footer */
+        .footer { background: var(--text-dark); color: white; padding: 4rem 0 2rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+        .footer-section h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.2rem; color: white; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 0.75rem; }
+        .footer-section ul li a { color: #d1d5db; text-decoration: none; transition: color 0.3s ease; }
+        .footer-section ul li a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid #374151; padding-top: 2rem; text-align: center; color: #9ca3af; }
+
+        /* Floating Elements */
+        .floating-whatsapp { position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: #25d366; color: white; padding: 1rem; border-radius: 50%; box-shadow: 0 8px 25px rgba(37,211,102,0.3); transition: all 0.3s ease; text-decoration: none; font-size: 1.5rem; animation: pulse 2s infinite; }
+        .floating-whatsapp:hover { transform: translateY(-3px) scale(1.1); box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4); }
+        @keyframes pulse { 0% { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);} 50% { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5), 0 0 0 10px rgba(37, 211, 102, 0.1);} 100% { box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);} }
+
+        /* Scroll to Top */
+        .scroll-top { position: fixed; bottom: 80px; right: 20px; background: var(--primary-blue); color: white; padding: 0.75rem; border-radius: 50%; box-shadow: 0 4px 15px rgba(30,64,175,0.3); cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 999; }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .scroll-top:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(30,64,175,0.4); }
+
+        /* Simple reveal animation helper */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+        .reveal.in { opacity: 1; transform: translateY(0); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links, .cta-button { display: none; }
+            .mobile-menu-btn { display: block; }
+            .header-content { height: 72px; padding: 0 1rem; }
+            .logo-icon { width: 50px; height: 50px; font-size: 1.5rem; }
+            .logo-text h1 { font-size: 1.28rem; }
+            .logo-text p { font-size: 0.76rem; }
+            .hero-content { padding: 0 1rem; }
+            .section { padding: 3rem 0; }
+            .container { padding: 0 1rem; }
+            .grid { gap: 1.5rem; }
+            .card { padding: 1.5rem; }
+            .section-title { font-size: 1.9rem; }
+            .contact-form, .calculator-container, .tracking-container, .admin-panel { padding: 2rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .admin-tabs { flex-wrap: wrap; }
+            .tracking-input { flex-direction: column; }
+            .tracking-timeline { padding-left: 1rem; }
+            .timeline-content { margin-left: 1rem; }
+            .tracking-status { flex-direction: column; text-align: center; gap: 1rem; }
+            .status-icon { margin: 0 auto; }
+            .admin-modal-content { padding: 2rem 1rem; margin: 1rem; max-height: 95vh; }
+            .admin-tabs { flex-direction: column; gap: 0.5rem; }
+            .admin-tab { padding: 0.75rem 1rem; text-align: center; }
+            .shipment-table { font-size: 0.875rem; }
+            .shipment-table th, .shipment-table td { padding: 0.5rem 0.25rem; }
+            .shipment-table th:nth-child(n+4), .shipment-table td:nth-child(n+4) { display: none; }
+        }
+
+        /* Admin Modal */
+        .admin-modal { position: fixed; inset: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
+        .admin-modal.active { display: flex; }
+        .admin-modal-content { background: white; border-radius: 20px; padding: 3rem; max-width: 1200px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.25); }
+        .admin-modal-close { position: absolute; top: 1rem; right: 1rem; background: #ef4444; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 1.25rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .admin-modal-close:hover { background: #dc2626; transform: scale(1.1); }
+
+        /* Utility */
+        .text-center { text-align: center; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mt-8 { margin-top: 2rem; }
+        .hidden { display: none; }
+        .visible { display: block; }
+    
+/* === PATCH: Admin Action Buttons & Table Responsiveness === */
+.shipment-table td:last-child {
+  white-space: nowrap;
+  min-width: 170px;
+}
+.shipment-table td:last-child button {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .45rem .75rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.btn-action { display:inline-flex; align-items:center; gap:.35rem; padding:.45rem .75rem; border:0; border-radius:8px; font-weight:600; cursor:pointer; }
+.btn-edit { background: #3b82f6; color: #fff; }
+.btn-view { background: #059669; color: #fff; }
+.btn-action + .btn-action { margin-left: .5rem; }
+
+@media (max-width: 768px){
+  /* Show all columns again on small screens; let container scroll horizontally */
+  .shipment-table { min-width: 720px; table-layout: auto; }
+  .shipment-table th:nth-child(n+4),
+  .shipment-table td:nth-child(n+4) { display: table-cell !important; }
+}
+
+/* === Quick Status Popup & New Entry Modal (merged) === */
+.status-popup{display:none;position:fixed;inset:0;z-index:1100;background:rgba(0,0,0,.75);align-items:center;justify-content:center;padding:1rem}
+.status-popup.active{display:flex}
+.status-card{background:#fff;border-radius:20px;max-width:580px;width:100%;padding:1.25rem;box-shadow:0 25px 50px rgba(0,0,0,.25)}
+.status-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}
+.status-btn{display:flex;align-items:center;justify-content:center;gap:.45rem;padding:.9rem;border-radius:14px;border:0;cursor:pointer;color:#fff;font-weight:800;box-shadow:0 8px 20px rgba(0,0,0,.12);transition:transform .08s}
+.status-btn:active{transform:scale(.98)}
+.status-pending{background:linear-gradient(135deg,#6b7280,#4b5563)}
+.status-picked{background:linear-gradient(135deg,#14b8a6,#0f766e)}
+.status-transit{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.status-destin{background:linear-gradient(135deg,#8b5cf6,#7c3aed)}
+.status-destout{background:linear-gradient(135deg,#1e40af,#3b82f6)}
+.status-outfd{background:linear-gradient(135deg,#0ea5e9,#0369a1)}
+.status-delivered{background:linear-gradient(135deg,#059669,#047857)}
+.status-input{margin:.4rem 0 .8rem}
+.status-input input{width:100%;padding:.7rem;border:2px solid #e5e7eb;border-radius:10px}
+
+.newentry-modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:1100;padding:1rem}
+.newentry-modal.active{display:flex}
+.newentry-card{background:#fff;border-radius:18px;max-width:1100px;width:100%;max-height:90vh;overflow:auto;position:relative;padding:1.4rem;box-shadow:0 25px 50px rgba(0,0,0,.25)}
+.newentry-close{position:absolute;top:.6rem;right:.6rem;background:#ef4444;color:#fff;border:0;width:40px;height:40px;border-radius:50%;cursor:pointer}
+
+
+/* === Professional Tracking Timeline === */
+.pro-trackbox{margin-top:1rem;padding:1rem;border:1px solid #e5e7eb;border-radius:14px;background:#fff}
+.pro-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem}
+.pro-badge{background:#e0e7ff;color:#1e3a8a;padding:.22rem .6rem;border-radius:999px;font-weight:700;font-size:.85rem}
+.pro-id{font-weight:800}
+.pro-timeline{position:relative;margin-top:.25rem}
+.pro-timeline:before{content:"";position:absolute;left:11px;top:0;bottom:0;width:2px;background:#e5e7eb}
+.pro-step{position:relative;padding-left:34px;padding-bottom:14px}
+.pro-step:last-child{padding-bottom:0}
+.pro-dot{position:absolute;left:4px;top:.25rem;width:16px;height:16px;border-radius:50%;background:#3b82f6;box-shadow:0 0 0 3px #e0e7ff}
+.pro-time{color:#6b7280;font-size:.86rem}
+.pro-title{font-weight:800;margin:.1rem 0}
+.pro-desc{color:#374151}
+
+
+/* === Immediate Action Required (anchored under Business Hours) === */
+.immediate-action{display:none;margin-top:14px;border:1px solid #f59e0b;background:#fffbeb;border-radius:14px;box-shadow:0 10px 25px rgba(0,0,0,.06)}
+.immediate-action__inner{padding:14px 16px;display:flex;align-items:flex-start;gap:12px}
+.immediate-action__icon{flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
+.immediate-action__content{flex:1 1 auto}
+.immediate-action__title{font-weight:800;color:#92400e;margin-bottom:4px}
+.immediate-action__msg{color:#78350f;line-height:1.45}
+.immediate-action__close{flex:0 0 auto;border:0;background:#fef3c7;color:#92400e;border-radius:10px;padding:6px 10px;cursor:pointer;font-weight:700}
+@media (max-width: 640px){
+  .immediate-action__inner{flex-direction:column;align-items:stretch}
+  .immediate-action__close{align-self:flex-end}
+}
+
+
+/* === Professional Tracking Timeline (live-sync) === */
+.pro-trackbox{margin-top:1rem;padding:1rem;border:1px solid #e5e7eb;border-radius:14px;background:#fff}
+.pro-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem}
+.pro-badge{background:#e0e7ff;color:#1e3a8a;padding:.22rem .6rem;border-radius:999px;font-weight:700;font-size:.85rem}
+.pro-id{font-weight:800}
+.pro-timeline{position:relative;margin-top:.25rem}
+.pro-timeline:before{content:"";position:absolute;left:11px;top:0;bottom:0;width:2px;background:#e5e7eb}
+.pro-step{position:relative;padding-left:34px;padding-bottom:14px}
+.pro-step:last-child{padding-bottom:0}
+.pro-dot{position:absolute;left:4px;top:.25rem;width:16px;height:16px;border-radius:50%;background:#3b82f6;box-shadow:0 0 0 3px #e0e7ff}
+.pro-time{color:#6b7280;font-size:.86rem}
+.pro-title{font-weight:800;margin:.1rem 0}
+.pro-desc{color:#374151}
+
+</style>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen" aria-live="polite" aria-label="Loading">
+        <div class="loader" role="status" aria-label="Loading spinner"></div>
+        <div class="loading-text">
+            <div>A to Z Packers & Movers</div>
+            <div class="loading-subtitle">Loading your complete moving solution...</div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon" aria-hidden="true">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>A to Z Packers & Movers</h1>
+                    <p>Since 2005 • Complete Solutions</p>
+                </div>
+            </div>
+
+            <nav class="nav" aria-label="Primary Navigation">
+                <div class="nav-links">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#calculator" class="nav-link">Calculator</a>
+                    <a href="#tracking" class="nav-link">Track</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                    <a href="#" class="nav-link" onclick="showAdminModal()">Admin</a>
+                </div>
+
+                <a href="tel:+919338888550" class="cta-button">
+                    <i class="fas fa-phone"></i>
+                    Call Now
+                </a>
+
+                <button class="mobile-menu-btn" aria-label="Open menu" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="mobile-menu">
+                <div class="mobile-nav-links">
+                    <a href="#home" class="nav-link" onclick="closeMobileMenu()">Home</a>
+                    <a href="#services" class="nav-link" onclick="closeMobileMenu()">Services</a>
+                    <a href="#calculator" class="nav-link" onclick="closeMobileMenu()">Calculator</a>
+                    <a href="#tracking" class="nav-link" onclick="closeMobileMenu()">Track</a>
+                    <a href="#contact" class="nav-link" onclick="closeMobileMenu()">Contact</a>
+                    <a href="#" class="nav-link" onclick="closeMobileMenu(); showAdminModal()">Admin</a>
+                    <a href="tel:+919338888550" class="cta-button" style="margin-top: 1rem; justify-content: center;">
+                        <i class="fas fa-phone"></i>
+                        Call Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero reveal" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Complete <span style="color: #fbbf24;">Moving Solutions</span> with Live Tracking
+            </h1>
+            <p class="hero-subtitle">
+                Professional packers & movers with real-time tracking, cost calculator, and admin panel. Serving all 30 districts of Odisha and every PIN code in India since 2005.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#calculator" class="btn-primary">
+                    <i class="fas fa-calculator"></i>
+                    Calculate Cost
+                </a>
+                <a href="#tracking" class="btn-secondary">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Track Shipment
+                </a>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card"><span class="stat-number">19+</span><span class="stat-label">Years of Excellence</span></div>
+                <div class="stat-card"><span class="stat-number">15K+</span><span class="stat-label">Happy Customers</span></div>
+                <div class="stat-card"><span class="stat-number">30</span><span class="stat-label">Districts Covered</span></div>
+                <div class="stat-card"><span class="stat-number">24/7</span><span class="stat-label">Live Tracking</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section reveal" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Professional Services</h2>
+                <p class="section-subtitle">Comprehensive moving solutions with live tracking and transparent pricing</p>
+            </div>
+
+            <div class="grid grid-4">
+                <div class="card text-center">
+                    <div class="card-icon" style="margin: 0 auto;"><i class="fas fa-home"></i></div>
+                    <h3 class="card-title">Household Shifting</h3>
+                    <p class="card-description">Complete home relocation with professional packing, live tracking, and safe transportation to your new location.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon" style="margin: 0 auto; background: linear-gradient(135deg, #10b981, #059669);"><i class="fas fa-building"></i></div>
+                    <h3 class="card-title">Office Relocation</h3>
+                    <p class="card-description">Seamless office moves with minimal downtime, specialized IT equipment handling, and real-time progress updates.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon" style="margin: 0 auto; background: linear-gradient(135deg, #ef4444, #dc2626);"><i class="fas fa-car"></i></div>
+                    <h3 class="card-title">Vehicle Transport</h3>
+                    <p class="card-description">Safe car and bike transportation with GPS tracking, door-to-door delivery, and comprehensive insurance coverage.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="card-icon" style="margin: 0 auto; background: linear-gradient(135deg, #8b5cf6, #7c3aed);"><i class="fas fa-warehouse"></i></div>
+                    <h3 class="card-title">Storage Solutions</h3>
+                    <p class="card-description">Secure warehousing with climate control, 24/7 security monitoring, and flexible storage duration options.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator -->
+    <section class="section section-alt reveal" id="calculator">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Moving Cost Calculator</h2>
+                <p class="section-subtitle">Get an instant estimate for your moving costs with our advanced calculator</p>
+            </div>
+
+            <div class="calculator-container">
+                <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 2rem; color: var(--text-dark); text-align: center;">
+                    <i class="fas fa-calculator" style="margin-right: 0.5rem; color: var(--secondary-blue);"></i>
+                    Calculate Your Moving Cost
+                </h3>
+
+                <form class="calculator-form" id="calculatorForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">From City *</label>
+                            <input type="text" id="fromCity" required class="form-input" placeholder="Current city">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">To City *</label>
+                            <input type="text" id="toCity" required class="form-input" placeholder="Destination city">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Service Type *</label>
+                            <select id="serviceType" required class="form-input">
+                                <option value="">Select Service</option>
+                                <option value="household">Household Shifting</option>
+                                <option value="office">Office Relocation</option>
+                                <option value="vehicle">Vehicle Transport</option>
+                                <option value="storage">Storage Solutions</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Home Size *</label>
+                            <select id="homeSize" required class="form-input">
+                                <option value="">Select Size</option>
+                                <option value="1bhk">1 BHK</option>
+                                <option value="2bhk">2 BHK</option>
+                                <option value="3bhk">3 BHK</option>
+                                <option value="4bhk">4+ BHK</option>
+                                <option value="villa">Villa/Independent House</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Distance (KM) *</label>
+                            <input type="number" id="distance" required class="form-input" placeholder="Approximate distance" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Moving Date</label>
+                            <input type="date" id="movingDate" class="form-input">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Additional Services</label>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 0.5rem;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                                <input type="checkbox" id="packing" value="packing"> Professional Packing (+₹2,000)
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                                <input type="checkbox" id="insurance" value="insurance"> Insurance Coverage (+₹1,500)
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                                <input type="checkbox" id="unpacking" value="unpacking"> Unpacking Service (+₹1,000)
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                                <input type="checkbox" id="storage" value="storage"> Temporary Storage (+₹3,000)
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="form-submit">
+                        <i class="fas fa-calculator" style="margin-right: 0.5rem;"></i> Calculate Cost
+                    </button>
+                </form>
+
+                <div id="calculatorResult" class="calculator-result" aria-live="polite">
+                    <div class="result-amount" id="resultAmount">₹0</div>
+                    <div class="result-label">Estimated Moving Cost</div>
+                    <p style="margin-top: 1rem; opacity: 0.9; font-size: 0.9rem;">*This is an approximate estimate. Final cost may vary based on actual requirements and site inspection.</p>
+                    <button onclick="requestQuote()" style="background: white; color: var(--success-green); padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-weight: 600; margin-top: 1rem; cursor: pointer;">Request Detailed Quote</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section class="section reveal" id="tracking">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Live Shipment Tracking</h2>
+                <p class="section-subtitle">Track your shipment in real-time with our advanced GPS tracking system</p>
+            </div>
+
+            <div class="tracking-container">
+                <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 2rem; color: var(--text-dark); text-align: center;">
+                    <i class="fas fa-map-marker-alt" style="margin-right: 0.5rem; color: var(--secondary-blue);"></i> Track Your Shipment
+                </h3>
+
+                <div class="tracking-input">
+                    <input type="text" id="trackingId" placeholder="Enter your tracking ID (e.g., ATZ2024001)" style="text-transform: uppercase;">
+                    <button onclick="trackShipment()"><i class="fas fa-search"></i> Track Now</button>
+                </div>
+
+                <div id="trackingResult" class="tracking-result">
+                    <div class="tracking-status">
+                        <div id="statusIcon" class="status-icon status-in-transit"><i class="fas fa-truck"></i></div>
+                        <div>
+                            <h3 id="statusTitle" style="color: var(--text-dark); margin-bottom: 0.5rem;">In Transit</h3>
+                            <p id="statusDescription" style="color: var(--text-gray);">Your shipment is on the way to destination</p>
+                            <p style="color: var(--text-gray); font-size: 0.875rem; margin-top: 0.25rem;">
+                                <strong>Tracking ID:</strong> <span id="displayTrackingId">ATZ2024001</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="tracking-timeline" id="trackingTimeline">
+                        <!-- timeline items injected by JS for freshness -->
+                    </div>
+
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-top: 2rem; border: 1px solid #e5e7eb;">
+                        <h4 style="color: var(--text-dark); margin-bottom: 1rem;">Shipment Details</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div><strong style="color: var(--text-gray); font-size: 0.875rem;">From:</strong><br><span id="trackingFrom">Cuttack, Odisha</span></div>
+                            <div><strong style="color: var(--text-gray); font-size: 0.875rem;">To:</strong><br><span id="trackingTo">Bhubaneswar, Odisha</span></div>
+                            <div><strong style="color: var(--text-gray); font-size: 0.875rem;">Service:</strong><br><span id="trackingService">Household Shifting</span></div>
+                            <div><strong style="color: var(--text-gray); font-size: 0.875rem;">Expected Delivery:</strong><br><span id="trackingETA">Today, 5:00 PM</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: var(--bg-light); border-radius: 12px;">
+                    <p style="color: var(--text-gray); margin-bottom: 1rem;">Need help with your shipment?</p>
+                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                        <a href="tel:+919338888550" style="background: var(--secondary-blue); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-phone"></i> Call Support
+                        </a>
+                        <a href="https://wa.me/919338888550" style="background: #25d366; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section reveal" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="section-subtitle">Real experiences from satisfied customers across Odisha and India</p>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">R</div>
+                        <div class="testimonial-info"><h4>Rajesh Kumar</h4><p>Bhubaneswar • Household Shifting</p></div>
+                    </div>
+                    <div class="testimonial-rating"><i class="fas fa-star star"></i><i class="fas fa-star star"></i><i class="fas fa-star star"></i><i class="fas fa-star star"></i><i class="fas fa-star star"></i></div>
+                    <p class="testimonial-text">"Excellent service with live tracking! I could monitor my household items throughout the journey from Cuttack to Bhubaneswar. The cost calculator was very accurate too. Highly recommended!"</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #10b981, #059669);">P</div>
+                        <div class="testimonial-info"><h4>Priya Sharma</h4><p>Rourkela • Office Relocation</p></div>
+                    </div>
+                    <div class="testimonial-rating"><i class="fas fa-star star"></i><i class="fas fa-star star"></i><i class="fas fa-star star"></i><i class="fas fa-star star"></i><i class="fas fa-star star"></i></div>
+                    <p class="testimonial-text">"Outstanding office relocation with real-time updates! The tracking system kept us informed at every step. Professional team, transparent pricing, and zero downtime. Perfect service!"</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">A</div>
+                        <div class="testimonial-info"><h4>Amit Patel</h4><p>Berhampur • Vehicle Transport</p></div>
+                    </div>
+                    <div class="testimonial-rating"><i class="fas fa-star star"></i><i class="fas fa-star star"></i><i class="fas fa-star star"></i><i class="fas fa-star star"></i><i class="fas fa-star star"></i></div>
+                    <p class="testimonial-text">"Best car transportation with GPS tracking! I could see exactly where my car was throughout the journey to Delhi. The cost calculator helped me budget perfectly. Trustworthy and reliable!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section section-alt reveal" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get Your Free Quote Today</h2>
+                <p class="section-subtitle">Ready to move? Contact us for a personalized quote with live tracking included</p>
+            </div>
+
+            <div class="grid grid-2">
+                <!-- Form -->
+                <div class="contact-form">
+                    <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 2rem; color: var(--text-dark);">Request Free Quote</h3>
+                    <form id="contactForm" onsubmit="submitForm(event)">
+                        <div class="form-group">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" name="name" required class="form-input" placeholder="Enter your full name">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Phone Number *</label>
+                                <input type="tel" name="phone" required class="form-input" placeholder="+91 9338888550">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" name="email" class="form-input" placeholder="your@email.com">
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">From City *</label>
+                                <input type="text" name="fromCity" required class="form-input" placeholder="Current city">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">To City *</label>
+                                <input type="text" name="toCity" required class="form-input" placeholder="Destination city">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Service Type *</label>
+                            <select name="serviceType" required class="form-input">
+                                <option value="">Select Service Type</option>
+                                <option value="household">Household Shifting</option>
+                                <option value="office">Office Relocation</option>
+                                <option value="vehicle">Vehicle Transport</option>
+                                <option value="storage">Storage Solutions</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Moving Date</label>
+                            <input type="date" name="movingDate" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Additional Details</label>
+                            <textarea name="message" class="form-input form-textarea" placeholder="Tell us about your moving requirements, home size, special items, etc."></textarea>
+                        </div>
+                        <button type="submit" class="form-submit"><i class="fas fa-paper-plane" style="margin-right: 0.5rem;"></i> Get Free Quote with Tracking</button>
+                    </form>
+                </div>
+
+                <!-- Info -->
+                <div>
+                    <div class="card mb-6">
+                        <h3 style="font-size: 1.6rem; font-weight: 700; margin-bottom: 1.4rem; color: var(--text-dark);">Contact Information</h3>
+                        <div style="display: flex; flex-direction: column; gap: 1.4rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--success-green), #047857); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white;"><i class="fas fa-phone"></i></div>
+                                <div><strong style="color: var(--text-dark);">Phone Number</strong><br><a href="tel:+919338888550" style="color: var(--secondary-blue); text-decoration: none; font-size: 1.1rem;">+91 9338888550</a></div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #25d366, #128c7e); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white;"><i class="fab fa-whatsapp"></i></div>
+                                <div><strong style="color: var(--text-dark);">WhatsApp</strong><br><a href="https://wa.me/919338888550" style="color: var(--secondary-blue); text-decoration: none; font-size: 1.1rem;">+91 9338888550</a></div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white;"><i class="fas fa-map-marker-alt"></i></div>
+                                <div><strong style="color: var(--text-dark);">Headquarters</strong><br><span style="color: var(--text-gray);">Cuttack, Odisha, India</span></div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--accent-orange), #d97706); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white;"><i class="fas fa-clock"></i></div>
+                                <div><strong style="color: var(--text-dark);">Business Hours</strong><br><span style="color: var(--text-gray);">24/7 Customer Support</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); color: white; text-align: center;">
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: white;">Need Immediate Assistance?</h3>
+                        <p style="margin-bottom: 2rem; opacity: 0.95;">Our team is ready to help you 24/7 with live tracking support</p>
+                        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                            <a href="tel:+919338888550" style="background: white; color: var(--primary-blue); padding: 1rem 1.5rem; border-radius: 10px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease;"><i class="fas fa-phone"></i> Call Now</a>
+                            <a href="https://wa.me/919338888550" style="background: #25d366; color: white; padding: 1rem 1.5rem; border-radius: 10px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>A to Z Packers & Movers</h3>
+                    <p style="color: #d1d5db; margin-bottom: 1.5rem;">Odisha's most trusted moving company since 2005. Professional, reliable, and customer-focused relocation services with live tracking.</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="tel:+919338888550" style="color: #d1d5db; font-size: 1.25rem; transition: color 0.3s ease;"><i class="fas fa-phone"></i></a>
+                        <a href="https://wa.me/919338888550" style="color: #d1d5db; font-size: 1.25rem; transition: color 0.3s ease;"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="#services">Household Shifting</a></li>
+                        <li><a href="#services">Office Relocation</a></li>
+                        <li><a href="#services">Vehicle Transport</a></li>
+                        <li><a href="#services">Storage Solutions</a></li>
+                        <li><a href="#services">Live Tracking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Tools & Features</h3>
+                    <ul>
+                        <li><a href="#calculator">Cost Calculator</a></li>
+                        <li><a href="#tracking">Live Tracking</a></li>
+                        <li><a href="#contact">Free Quote</a></li>
+                        <li><a href="#testimonials">Customer Reviews</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Coverage Areas</h3>
+                    <ul>
+                        <li><a href="#">All 30 Districts of Odisha</a></li>
+                        <li><a href="#">Pan-India Coverage</a></li>
+                        <li><a href="#">Local & Long Distance</a></li>
+                        <li><a href="#">Interstate Moving</a></li>
+                        <li><a href="#">International Shipping</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 A to Z Packers & Movers. All rights reserved. | Licensed & Insured | Live Tracking Enabled | Serving Odisha since 2005</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/919338888550" class="floating-whatsapp" title="Chat on WhatsApp" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></div>
+
+    <!-- Admin Modal -->
+    <div class="admin-modal" id="adminModal" role="dialog" aria-modal="true" aria-label="Admin Panel">
+        <div class="admin-modal-content">
+            <button class="admin-modal-close" onclick="closeAdminModal()" aria-label="Close admin panel"><i class="fas fa-times"></i></button>
+
+            <!-- Admin Login -->
+            <div id="adminLogin" class="admin-login">
+                <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 2rem; color: var(--text-dark); text-align: center;">
+                    <i class="fas fa-user-shield" style="margin-right: 0.5rem; color: var(--secondary-blue);"></i> Admin Login
+                </h3>
+                <form onsubmit="adminLogin(event)" style="max-width: 400px; margin: 0 auto;">
+                    <div class="form-group">
+                        <label class="form-label">Username</label>
+                        <input type="text" id="adminUsername" required class="form-input" placeholder="Enter admin username">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="adminPassword" required class="form-input" placeholder="Enter admin password">
+                    </div>
+                    <button type="submit" class="form-submit"><i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i> Login to Dashboard</button>
+                </form>
+                <div style="margin-top: 1rem; padding: 0.8rem; background: #fef3c7; border-radius: 8px; border: 1px solid #f59e0b; max-width: 400px; margin-left: auto; margin-right: auto;">
+                    <p style="color: #92400e; font-size: 0.875rem; margin: 0; text-align: center;"><strong>Demo Credentials:</strong> Username: admin &nbsp;|&nbsp; Password: admin123</p>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div id="adminDashboard" class="admin-dashboard">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 1rem;">
+                    <h3 style="font-size: 1.6rem; font-weight: 700; color: var(--text-dark);"><i class="fas fa-tachometer-alt" style="margin-right: 0.5rem; color: var(--secondary-blue);"></i> Admin Dashboard</h3>
+                    <button onclick="adminLogout()" style="background: #ef4444; color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </div>
+
+                <!-- Tabs -->
+                <div class="admin-tabs" id="adminTabs">
+                    <button class="admin-tab active" data-tab="shipments"><i class="fas fa-shipping-fast"></i> Shipments</button>
+                    <button class="admin-tab" data-tab="customers"><i class="fas fa-users"></i> Customers</button>
+                    <button class="admin-tab" data-tab="analytics"><i class="fas fa-chart-bar"></i> Analytics</button>
+                    <button class="admin-tab" data-tab="settings"><i class="fas fa-cog"></i> Settings</button>
+                </div>
+
+                <!-- Shipments Tab -->
+                <div id="shipmentsTab" class="admin-content active">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                        <h4 style="color: var(--text-dark);">Recent Shipments</h4>
+                        <button onclick="addNewShipment()" style="background: var(--success-green); color: white; padding: 0.5rem 1rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;"><i class="fas fa-plus"></i> Add Shipment</button>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="shipment-table">
+                            <thead>
+                                <tr>
+                                    <th>Tracking ID</th><th>Customer</th><th>From → To</th><th>Service</th><th>Status</th><th>Date</th><th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="shipmentsTableBody">
+                                <tr>
+                                    <td><strong>ATZ2024001</strong></td><td>Rajesh Kumar</td><td>Cuttack → Bhubaneswar</td><td>Household</td>
+                                    <td><span class="status-badge status-in-progress">In Transit</span></td><td>Dec 15, 2024</td>
+                                    <td>
+                                        <button onclick="editShipment('ATZ2024001')" style="background: var(--secondary-blue); color: white; padding: 0.25rem 0.5rem; border: none; border-radius: 4px; margin-right: 0.5rem; cursor: pointer;"><i class="fas fa-edit"></i></button>
+                                        <button onclick="viewShipment('ATZ2024001')" style="background: var(--success-green); color: white; padding: 0.25rem 0.5rem; border: none; border-radius: 4px; cursor: pointer;"><i class="fas fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ATZ2024002</strong></td><td>Priya Sharma</td><td>Rourkela → Delhi</td><td>Office</td>
+                                    <td><span class="status-badge status-completed">Delivered</span></td><td>Dec 14, 2024</td>
+                                    <td>
+                                        <button onclick="editShipment('ATZ2024002')" style="background: var(--secondary-blue); color: white; padding: 0.25rem 0.5rem; border: none; border-radius: 4px; margin-right: 0.5rem; cursor: pointer;"><i class="fas fa-edit"></i></button>
+                                        <button onclick="viewShipment('ATZ2024002')" style="background: var(--success-green); color: white; padding: 0.25rem 0.5rem; border: none; border-radius: 4px; cursor: pointer;"><i class="fas fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ATZ2024003</strong></td><td>Amit Patel</td><td>Berhampur → Mumbai</td><td>Vehicle</td>
+                                    <td><span class="status-badge status-pending">Pending</span></td><td>Dec 16, 2024</td>
+                                    <td>
+                                        <button onclick="editShipment('ATZ2024003')" style="background: var(--secondary-blue); color: white; padding: 0.25rem 0.5rem; border: none; border-radius: 4px; margin-right: 0.5rem; cursor: pointer;"><i class="fas fa-edit"></i></button>
+                                        <button onclick="viewShipment('ATZ2024003')" style="background: var(--success-green); color: white; padding: 0.25rem 0.5rem; border: none; border-radius: 4px; cursor: pointer;"><i class="fas fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Customers Tab -->
+                <div id="customersTab" class="admin-content">
+                    <h4 style="color: var(--text-dark); margin-bottom: 1.2rem;">Customer Management</h4>
+                    <div class="grid grid-3">
+                        <div class="card text-center">
+                            <div class="card-icon" style="margin: 0 auto; background: linear-gradient(135deg, var(--success-green), #047857);"><i class="fas fa-users"></i></div>
+                            <h3 class="card-title">Total Customers</h3>
+                            <p style="font-size: 2rem; font-weight: 800; color: var(--success-green); margin: 1rem 0;">15,247</p>
+                        </div>
+                        <div class="card text-center">
+                            <div class="card-icon" style="margin: 0 auto; background: linear-gradient(135deg, var(--accent-orange), #d97706);"><i class="fas fa-user-plus"></i></div>
+                            <h3 class="card-title">New This Month</h3>
+                            <p style="font-size: 2rem; font-weight: 800; color: var(--accent-orange); margin: 1rem 0;">342</p>
+                        </div>
+                        <div class="card text-center">
+                            <div class="card-icon" style="margin: 0 auto; background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));"><i class="fas fa-star"></i></div>
+                            <h3 class="card-title">Satisfaction Rate</h3>
+                            <p style="font-size: 2rem; font-weight: 800; color: var(--secondary-blue); margin: 1rem 0;">99.2%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Tab -->
+                <div id="analyticsTab" class="admin-content">
+                    <h4 style="color: var(--text-dark); margin-bottom: 1.2rem;">Business Analytics</h4>
+                    <div class="grid grid-2">
+                        <div class="card">
+                            <h3 class="card-title">Monthly Revenue</h3>
+                            <p style="font-size: 2.2rem; font-weight: 800; color: var(--success-green); margin: 1rem 0;">₹12.5L</p>
+                            <p class="card-description">+15% from last month</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title">Active Shipments</h3>
+                            <p style="font-size: 2.2rem; font-weight: 800; color: var(--secondary-blue); margin: 1rem 0;">127</p>
+                            <p class="card-description">Currently in transit</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div id="settingsTab" class="admin-content">
+                    <h4 style="color: var(--text-dark); margin-bottom: 1.2rem;">System Settings</h4>
+                    <div class="card">
+                        <h3 class="card-title">Pricing Configuration</h3>
+                        <p class="card-description">Manage base rates, distance multipliers, and service charges for the cost calculator.</p>
+                        <button onclick="configurePricing()" style="background: var(--secondary-blue); color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 8px; font-weight: 600; margin-top: 1rem; cursor: pointer;"><i class="fas fa-cog"></i> Configure Pricing</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+/* TTL set to 7 days */
+        // --- Loading Screen ---
+        window.addEventListener('load', function(){
+            setTimeout(function(){ document.getElementById('loadingScreen').classList.add('hide'); }, 900);
+        });
+
+        // --- Header Scroll + ScrollTop ---
+        window.addEventListener('scroll', function(){
+            const header = document.getElementById('header');
+            const scrollTopBtn = document.getElementById('scrollTop');
+            if (window.scrollY > 100){ header.classList.add('scrolled'); scrollTopBtn.classList.add('visible'); }
+            else { header.classList.remove('scrolled'); scrollTopBtn.classList.remove('visible'); }
+        });
+
+        // --- Mobile Menu ---
+        function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('active'); }
+        function closeMobileMenu(){ document.getElementById('mobileMenu').classList.remove('active'); }
+
+        // --- Smooth Scrolling for hash links only ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e){
+                const href = this.getAttribute('href');
+                const target = document.querySelector(href);
+                if (target){
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    closeMobileMenu();
+                    updateActiveNavLink(href);
+                }
+            });
+        });
+
+        function updateActiveNavLink(targetId){
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            document.querySelectorAll('a[href="' + targetId + '"]').forEach(link => link.classList.add('active'));
+        }
+
+        // --- Scroll to Top ---
+        function scrollToTop(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        // --- Calculator ---
+        document.getElementById('calculatorForm').addEventListener('submit', function(e){
+            e.preventDefault();
+            const homeSize = document.getElementById('homeSize').value;
+            const serviceType = document.getElementById('serviceType').value;
+            const distance = parseInt(document.getElementById('distance').value, 10);
+
+            const baseRates = { '1bhk': 8000, '2bhk': 12000, '3bhk': 18000, '4bhk': 25000, 'villa': 35000 };
+            const serviceMultipliers = { 'household': 1.0, 'office': 1.2, 'vehicle': 0.8, 'storage': 1.1 };
+
+            let baseRate = baseRates[homeSize] || 15000;
+            let serviceMultiplier = serviceMultipliers[serviceType] || 1.0;
+            let distanceRate = (isNaN(distance) ? 0 : distance * 15);
+
+            let totalCost = (baseRate + distanceRate) * serviceMultiplier;
+            if (document.getElementById('packing').checked) totalCost += 2000;
+            if (document.getElementById('insurance').checked) totalCost += 1500;
+            if (document.getElementById('unpacking').checked) totalCost += 1000;
+            if (document.getElementById('storage').checked) totalCost += 3000;
+
+            document.getElementById('resultAmount').textContent = '₹' + totalCost.toLocaleString('en-IN');
+            document.getElementById('calculatorResult').style.display = 'block';
+            document.getElementById('calculatorResult').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function requestQuote(){
+            const fromCity = document.getElementById('fromCity').value || '-';
+            const toCity = document.getElementById('toCity').value || '-';
+            const serviceType = document.getElementById('serviceType').value || '-';
+            const homeSize = document.getElementById('homeSize').value || '-';
+            const distance = document.getElementById('distance').value || '-';
+            const resultAmount = document.getElementById('resultAmount').textContent || '₹0';
+
+            const message = `*Quote Request from Cost Calculator*\n\n*Moving Details:*\nFrom: ${fromCity}\nTo: ${toCity}\nService: ${serviceType}\nHome Size: ${homeSize}\nDistance: ${distance} km\n\n*Estimated Cost:* ${resultAmount}\n\n*Additional Services:*\n${document.getElementById('packing').checked ? '✓ Professional Packing\n' : ''}${document.getElementById('insurance').checked ? '✓ Insurance Coverage\n' : ''}${document.getElementById('unpacking').checked ? '✓ Unpacking Service\n' : ''}${document.getElementById('storage').checked ? '✓ Temporary Storage\n' : ''}\nPlease provide detailed quote with live tracking included.\n\n*Timestamp:* ${new Date().toLocaleString('en-IN')}`;
+
+            window.open(`https://wa.me/919338888550?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // --- Tracking ---
+        function trackShipment(){
+            const trackingId = (document.getElementById('trackingId').value || '').toUpperCase().trim();
+            if (!trackingId){ alert('Please enter a tracking ID'); return; }
+
+            const trackingData = {
+                'ATZ2024001': { status: 'In Transit', statusClass: 'status-in-transit', icon: 'fas fa-truck', description: 'Your shipment is on the way to destination', from: 'Cuttack, Odisha', to: 'Bhubaneswar, Odisha', service: 'Household Shifting', eta: 'Today, 5:00 PM' },
+                'ATZ2024002': { status: 'Delivered', statusClass: 'status-delivered', icon: 'fas fa-check-circle', description: 'Your shipment has been successfully delivered', from: 'Rourkela, Odisha', to: 'Delhi, India', service: 'Office Relocation', eta: 'Delivered on Dec 14, 2024' },
+                'ATZ2024003': { status: 'Pending Pickup', statusClass: 'status-pending', icon: 'fas fa-clock', description: 'Shipment is scheduled for pickup', from: 'Berhampur, Odisha', to: 'Mumbai, India', service: 'Vehicle Transport', eta: 'Pickup scheduled for Dec 17, 2024' }
+            };
+
+            const data = trackingData[trackingId];
+            if (!data){ alert('Tracking ID not found. Please check your tracking ID and try again.'); return; }
+
+            document.getElementById('displayTrackingId').textContent = trackingId;
+            const statusIcon = document.getElementById('statusIcon');
+            statusIcon.className = 'status-icon ' + data.statusClass;
+            statusIcon.innerHTML = `<i class="${data.icon}"></i>`;
+            document.getElementById('statusTitle').textContent = data.status;
+            document.getElementById('statusDescription').textContent = data.description;
+            document.getElementById('trackingFrom').textContent = data.from;
+            document.getElementById('trackingTo').textContent = data.to;
+            document.getElementById('trackingService').textContent = data.service;
+            document.getElementById('trackingETA').textContent = data.eta;
+
+            // Fresh timeline for "today" example
+            const timeline = document.getElementById('trackingTimeline');
+            timeline.innerHTML = `
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">${new Date().toLocaleString('en-IN', { hour: '2-digit', minute: '2-digit' })}</div>
+                        <div class="timeline-title">${data.status === 'Delivered' ? 'Delivered' : 'Out for Delivery'}</div>
+                        <div class="timeline-description">${data.status === 'Delivered' ? 'Shipment delivered successfully' : 'Your shipment will reach you soon'}</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">Today, 10:15 AM</div>
+                        <div class="timeline-title">Reached Destination Hub</div>
+                        <div class="timeline-description">Shipment has reached the destination city hub</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">Yesterday, 6:45 PM</div>
+                        <div class="timeline-title">In Transit</div>
+                        <div class="timeline-description">Shipment is in transit to destination city</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-time">Yesterday, 9:00 AM</div>
+                        <div class="timeline-title">Picked Up</div>
+                        <div class="timeline-description">Shipment has been picked up from origin location</div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('trackingResult').style.display = 'block';
+            document.getElementById('trackingResult').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- Admin Modal ---
+        function showAdminModal(){ document.getElementById('adminModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+        function closeAdminModal(){ document.getElementById('adminModal').classList.remove('active'); document.body.style.overflow = 'auto'; adminLogout(); }
+
+        // --- Admin Auth ---
+        function adminLogin(event){
+            event.preventDefault();
+            const u = document.getElementById('adminUsername').value.trim();
+            const p = document.getElementById('adminPassword').value.trim();
+            if (u === 'admin' && p === 'admin123'){ document.getElementById('adminLogin').style.display = 'none'; document.getElementById('adminDashboard').style.display = 'block'; bindAdminTabs(); }
+            else { alert('Invalid credentials. Please use demo credentials: admin / admin123'); }
+        }
+        function adminLogout(){
+            document.getElementById('adminLogin').style.display = 'block';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('adminUsername').value = '';
+            document.getElementById('adminPassword').value = '';
+        }
+
+        // --- Admin Tabs (fixed: no reliance on global event) ---
+        function bindAdminTabs(){
+            document.querySelectorAll('#adminTabs .admin-tab').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.getAttribute('data-tab');
+                    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                    btn.classList.add('active');
+                    document.querySelectorAll('.admin-content').forEach(c => c.classList.remove('active'));
+                    document.getElementById(target + 'Tab').classList.add('active');
+                });
+            });
+        }
+
+        // --- Admin: Shipments CRUD (demo) ---
+        let shipmentCounter = 4;
+        function addNewShipment(){
+            const customerName = prompt('Enter customer name:'); if (!customerName) return;
+            const fromCity = prompt('Enter origin city:'); if (!fromCity) return;
+            const toCity = prompt('Enter destination city:'); if (!toCity) return;
+            const serviceType = prompt('Enter service type (Household/Office/Vehicle/Storage):'); if (!serviceType) return;
+
+            const trackingId = `ATZ2024${String(shipmentCounter).padStart(3, '0')}`; shipmentCounter++;
+            const tableBody = document.getElementById('shipmentsTableBody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><strong>${trackingId}</strong></td>
+                <td>${customerName}</td>
+                <td>${fromCity} → ${toCity}</td>
+                <td>${serviceType}</td>
+                <td><span class="status-badge status-pending">Pending</span></td>
+                <td>${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</td>
+                <td>
+                    <button onclick="editShipment('${trackingId}')" style="background: var(--secondary-blue); color: white; padding: 0.25rem 0.5rem; border: none; border-radius: 4px; margin-right: 0.5rem; cursor: pointer;"><i class="fas fa-edit"></i></button>
+                    <button onclick="viewShipment('${trackingId}')" style="background: var(--success-green); color: white; padding: 0.25rem 0.5rem; border: none; border-radius: 4px; cursor: pointer;"><i class="fas fa-eye"></i></button>
+                </td>`;
+            tableBody.appendChild(newRow);
+            alert(`New shipment ${trackingId} added successfully!`);
+        }
+        function editShipment(trackingId){
+            const newStatus = prompt(`Edit status for shipment ${trackingId}:\n1. Pending\n2. In Transit\n3. Delivered\n\nEnter choice (1-3):`);
+            if (!newStatus) return;
+            const map = { '1': { text: 'Pending', cls: 'status-pending' }, '2': { text: 'In Transit', cls: 'status-in-progress' }, '3': { text: 'Delivered', cls: 'status-completed' } };
+            const status = map[newStatus];
+            if (!status) return alert('Invalid selection.');
+            document.querySelectorAll('#shipmentsTableBody tr').forEach(row => {
+                const idCell = row.querySelector('td strong');
+                if (idCell && idCell.textContent === trackingId){
+                    const badge = row.querySelector('.status-badge');
+                    badge.textContent = status.text;
+                    badge.className = 'status-badge ' + status.cls;
+                }
+            });
+            alert(`Shipment ${trackingId} status updated to: ${status.text}`);
+        }
+        function viewShipment(trackingId){
+            alert(`Viewing detailed information for shipment ${trackingId}:\n\n• Real-time GPS tracking\n• Delivery timeline\n• Customer contact details\n• Special instructions\n• Insurance information`);
+        }
+        function configurePricing(){
+            const action = prompt('Pricing Configuration Options:\\n\\n1. Update Base Rates\\n2. Modify Distance Charges\\n3. Adjust Service Multipliers\\n4. Set Additional Service Costs\\n\\nEnter choice (1-4):');
+            switch(action){
+                case '1': alert('Base Rate Configuration saved.'); break;
+                case '2': const r = prompt('Enter new rate per kilometer (current: ₹15):'); if (r && !isNaN(r)) alert('Distance rate updated!'); break;
+                case '3': alert('Service Multipliers configured successfully!'); break;
+                case '4': alert('Additional Service Costs updated successfully!'); break;
+                default: alert('Invalid selection. Please try again.');
+            }
+        }
+
+        // --- Contact Form -> WhatsApp ---
+        function submitForm(event){
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            const message = `*New Quote Request - A to Z Packers & Movers*\n\n*Customer Details:*\nName: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email || 'Not provided'}\n\n*Moving Details:*\nFrom: ${data.fromCity}\nTo: ${data.toCity}\nService Type: ${data.serviceType}\nMoving Date: ${data.movingDate || 'Not specified'}\n\n*Additional Details:*\n${data.message || 'No additional details provided'}\n\n*Special Request:* Please include live tracking system\n\n*Timestamp:* ${new Date().toLocaleString('en-IN')}`;
+            window.open(`https://wa.me/919338888550?text=${encodeURIComponent(message)}`, '_blank');
+            alert('Thank you for your quote request! You will be redirected to WhatsApp to send your details directly to our team with live tracking included.');
+            event.target.reset();
+        }
+
+        // --- Intersection Observer (fixed from truncated code) ---
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    </script>
+
+<!-- PATCH: 7-day persistence for Admin Shipments + button styling -->
+<script>
+(function(){
+  const STORAGE_KEY = 'atz_shipments_v1';
+  const TTL_DAYS =  7;
+  const ttlMs = TTL_DAYS * 24 * 60 * 60 * 1000;
+
+  function loadShipments(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw){ return []; }
+      let arr = JSON.parse(raw);
+      const now = Date.now();
+      arr = arr.filter(it => now - (it.created_at || now) < ttlMs);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+      return arr;
+    }catch(e){ console.warn('loadShipments failed', e); return []; }
+  }
+  function saveShipments(arr){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+    catch(e){ console.warn('saveShipments failed', e); }
+  }
+
+  function domStatusClass(status){
+    const s = (status||'').toLowerCase();
+    if(s.includes('deliver') || s==='delivered') return 'status-completed';
+    if(s.includes('transit') || s==='in transit' || s.includes('progress')) return 'status-in-progress';
+    return 'status-pending';
+  }
+
+  function readTableIfAny(){
+    const tbody = document.getElementById('shipmentsTableBody') || document.querySelector('.shipment-table tbody');
+    if(!tbody) return [];
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const list = [];
+    rows.forEach(tr => {
+      const tds = tr.querySelectorAll('td');
+      if(tds.length >= 6){
+        list.push({
+          id: (tds[0].innerText||'').trim(),
+          customer: (tds[1].innerText||'').trim(),
+          route: (tds[2].innerText||'').trim(),
+          from: ((tds[2].innerText||'').split('→')[0]||'').trim(),
+          to: ((tds[2].innerText||'').split('→')[1]||'').trim(),
+          service: (tds[3].innerText||'').trim(),
+          status: (tds[4].innerText||'').trim(),
+          date: (tds[5].innerText||'').trim(),
+          created_at: Date.now()
+        });
+      }
+    });
+    return list;
+  }
+
+  function renderTable(shipments){
+    const tbody = document.getElementById('shipmentsTableBody') || document.querySelector('.shipment-table tbody');
+    if(!tbody) return;
+    tbody.innerHTML = shipments.map(s => {
+      const route = s.route || `${s.from||''} → ${s.to||''}`;
+      return `<tr>
+        <td><strong>${s.id}</strong></td>
+        <td>${s.customer||''}</td>
+        <td>${route}</td>
+        <td>${s.service||''}</td>
+        <td><span class="status-badge ${domStatusClass(s.status)}">${s.status||'Pending'}</span></td>
+        <td>${s.date||''}</td>
+        <td>
+          <button class="btn-action btn-edit" onclick="editShipment('${s.id}')"><i class="fas fa-edit"></i> Edit</button>
+          <button class="btn-action btn-view" onclick="viewShipment('${s.id}')"><i class="fas fa-eye"></i> View</button>
+        </td>
+      </tr>`;
+    }).join('');
+  }
+
+  // Bootstrap: load from storage, or seed from DOM once
+  let shipments = loadShipments();
+  if(!shipments.length){
+    const seeded = readTableIfAny();
+    if(seeded.length){
+      shipments = seeded;
+      saveShipments(shipments);
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    // Label icon-only buttons for better tap targets
+    document.querySelectorAll('.shipment-table td:last-child button[onclick]').forEach(btn => {
+      const onclick = btn.getAttribute('onclick') || '';
+      const hasText = (btn.textContent || '').trim().length > 0;
+      if (!hasText) {
+        if (onclick.includes('editShipment')) { btn.append(' Edit'); }
+        else if (onclick.includes('viewShipment')) { btn.append(' View'); }
+      }
+    });
+
+    // Style any existing action buttons (fallback)
+    document.querySelectorAll('.shipment-table td:last-child button').forEach(btn => {
+      if(!btn.classList.contains('btn-action')) btn.classList.add('btn-action');
+      if(btn.innerText.toLowerCase().includes('edit')) btn.classList.add('btn-edit');
+      if(btn.innerText.toLowerCase().includes('view')) btn.classList.add('btn-view');
+    });
+    if(shipments.length){ renderTable(shipments); }
+    // Hook "Add" button if present
+    const addBtn = document.getElementById('addShipmentBtn');
+    if(addBtn && !addBtn.dataset.persistHooked){
+      addBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        if(typeof addNewShipment === 'function'){ addNewShipment(); }
+      });
+      addBtn.dataset.persistHooked = '1';
+    }
+  });
+
+  // Override/augment existing functions safely
+  const _origEdit = window.editShipment;
+  window.editShipment = function(trackingId){
+    try{
+      const idx = shipments.findIndex(s => (s.id||'').toUpperCase() === (trackingId||'').toUpperCase());
+      if(idx === -1){ if(typeof _origEdit === 'function') return _origEdit(trackingId); return; }
+      const current = shipments[idx];
+      const nextStatus = prompt('Update status:', current.status || 'Pending') || current.status;
+      shipments[idx].status = nextStatus;
+      saveShipments(shipments);
+      renderTable(shipments);
+    }catch(e){
+      console.warn('editShipment override failed', e);
+      if(typeof _origEdit === 'function') return _origEdit(trackingId);
+    }
+  };
+
+  const _origView = window.viewShipment;
+  window.viewShipment = function(trackingId){
+    try{
+      const s = shipments.find(x => (x.id||'').toUpperCase() === (trackingId||'').toUpperCase());
+      if(s){
+        alert(
+          'Tracking: ' + s.id + '\n' +
+          'Customer: ' + (s.customer||'') + '\n' +
+          'Route: ' + (s.from||'') + ' → ' + (s.to||'') + '\n' +
+          'Service: ' + (s.service||'') + '\n' +
+          'Status: ' + (s.status||'') + '\n' +
+          'Date: ' + (s.date||'')
+        );
+        return;
+      }
+    }catch(e){ console.warn('viewShipment override failed', e); }
+    if(typeof _origView === 'function') return _origView(trackingId);
+  };
+
+  const _origAdd = window.addNewShipment;
+  window.addNewShipment = function(){
+    try{
+      // Try prompts similar to your original function
+      let customerName = prompt('Enter customer name:');
+      if(!customerName) return;
+      let fromCity = prompt('Enter origin city:');
+      if(!fromCity) return;
+      let toCity = prompt('Enter destination city:');
+      if(!toCity) return;
+      let serviceType = prompt('Enter service type (Household/Office/Vehicle/Storage):');
+      if(!serviceType) serviceType = 'Household';
+      const trackingId = 'ATZ' + new Date().getFullYear() + String(Math.floor(Math.random()*10000)).padStart(4, '0');
+      const date = new Date().toLocaleDateString('en-IN', { month:'short', day:'2-digit', year:'numeric' });
+      const status = 'Pending';
+
+      shipments.unshift({
+        id: trackingId,
+        customer: customerName,
+        from: fromCity,
+        to: toCity,
+        route: fromCity + ' → ' + toCity,
+        service: serviceType,
+        status,
+        date,
+        created_at: Date.now()
+      });
+      saveShipments(shipments);
+      renderTable(shipments);
+    }catch(e){
+      console.warn('addNewShipment override failed', e);
+      if(typeof _origAdd === 'function') return _origAdd();
+    }
+  };
+})();
+</script>
+
+  <!-- Quick Status Popup (Merged) -->
+  <div id="statusPopup" class="status-popup" role="dialog" aria-modal="true" aria-label="Update Status">
+    <div class="status-card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h4 style="font-size:1.2rem;font-weight:900">Quick Status Update</h4>
+        <button class="admin-modal-close" style="position:static" onclick="closeStatusPopup()" aria-label="Close"><i class="fas fa-times"></i></button>
+      </div>
+      <p style="color:#6b7280;margin:.2rem 0 .8rem">Type your own first-entry line for Destination In / Destination Out if needed, then tap a status.</p>
+      <div class="status-input">
+        <input id="statusFreeText" placeholder="✍️ Custom note for Destination In/Out (first entry)">
+      </div>
+      <div class="status-grid">
+        <button class="status-btn status-pending"   onclick="setStatus('Pending Booking','⏳ Pending booking')"><i class="far fa-clock"></i> Pending Booking</button>
+        <button class="status-btn status-picked"    onclick="setStatus('Picked Up','📦 Picked up from origin')"><i class="fas fa-box"></i> Picked Up</button>
+        <button class="status-btn status-transit"   onclick="setStatus('Transit','🚚 In transit')"><i class="fas fa-truck-fast"></i> Transit</button>
+        <button class="status-btn status-destin"    onclick="setStatus('Destination In','📍 ' + (document.getElementById('statusFreeText').value||'Reached destination hub'))"><i class="fas fa-location-dot"></i> Destination In</button>
+        <button class="status-btn status-destout"   onclick="setStatus('Destination Out','➡️ ' + (document.getElementById('statusFreeText').value||'Left destination hub'))"><i class="fas fa-arrow-right"></i> Destination Out</button>
+        <button class="status-btn status-outfd"     onclick="setStatus('Out for Delivery','🛵 Out for delivery')"><i class="fas fa-motorcycle"></i> Out for Delivery</button>
+        <button class="status-btn status-delivered" onclick="setStatus('Delivered','✅ Delivered')"><i class="fas fa-check"></i> Delivered</button>
+      </div>
+      <div style="margin-top:.8rem;display:flex;justify-content:flex-end;gap:.5rem">
+        <button class="btn-primary" style="background:#e5e7eb;color:#111827;padding:.6rem 1rem;border-radius:10px;border:none;cursor:pointer" onclick="closeStatusPopup()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Entry Modal (Merged) -->
+  <div id="newEntryModal" class="newentry-modal" role="dialog" aria-modal="true" aria-label="New Entry">
+    <div class="newentry-card">
+      <button class="newentry-close" onclick="closeNewEntry()" aria-label="Close new entry"><i class="fas fa-times"></i></button>
+      <h3 style="font-size:1.4rem;font-weight:900;margin-bottom:.8rem"><i class="fas fa-file-circle-plus" style="color:#059669"></i> New Entry</h3>
+      <form id="newEntryForm" onsubmit="return saveNewEntry(event)">
+        <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="form-group">
+            <label class="form-label">Customer Name *</label>
+            <input class="form-input" name="custName" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Contact Number (Party) *</label>
+            <input class="form-input" name="custPhone" required placeholder="+91XXXXXXXXXX">
+          </div>
+        </div>
+        <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="form-group">
+            <label class="form-label">From Location *</label>
+            <input class="form-input" name="fromLoc" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">To Location *</label>
+            <input class="form-input" name="toLoc" required>
+          </div>
+        </div>
+        <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="form-group">
+            <label class="form-label">Pickup Date *</label>
+            <input class="form-input" type="date" name="pickupDate" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Expected Delivery Date *</label>
+            <input class="form-input" type="date" name="expDelivery" required>
+          </div>
+        </div>
+        <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="form-group">
+            <label class="form-label">Select Type of Service *</label>
+            <select class="form-input" name="service" required>
+              <option value="">Select</option><option>Household Shifting</option><option>Office Relocation</option><option>Vehicle Transport</option><option>Storage Solutions</option><option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Estimated Distance (KM)</label>
+            <input class="form-input" type="number" name="km" min="1" placeholder="e.g., 350">
+          </div>
+        </div>
+        <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="form-group">
+            <label class="form-label">Contact Number (Driver)</label>
+            <input class="form-input" name="driverPhone" placeholder="+91XXXXXXXXXX">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Driver Name</label>
+            <input class="form-input" name="driverName" placeholder="Driver">
+          </div>
+        </div>
+        <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="form-group">
+            <label class="form-label">Vehicle Number</label>
+            <input class="form-input" name="vehicleNo" placeholder="OD XX XX XXXX">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Special Instruction</label>
+            <input class="form-input" name="special" placeholder="Fragile, floor, lift, etc.">
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:.5rem;margin-top:.8rem">
+          <button type="button" onclick="closeNewEntry()" style="background:#e5e7eb;color:#111827;padding:.6rem 1rem;border-radius:10px;border:none;cursor:pointer">Cancel</button>
+          <button type="submit" style="background:linear-gradient(135deg,#3b82f6,#1e40af);color:#fff;padding:.6rem 1rem;border-radius:10px;border:none;cursor:pointer"><i class="fas fa-floppy-disk" style="margin-right:.4rem"></i> Save & WhatsApp</button>
+        </div>
+      </form>
+      <small style="color:#6b7280">💡 After saving, an automatic WhatsApp message is sent to the party number with tracking details.</small>
+    </div>
+  </div>
+
+
+<script>
+// === Merged enhancements ===
+(function(){
+  let currentEditId = null;
+
+  // Helper: Find shipments table and get phone cell if available (we use business number fallback)
+  function getRowByTrackingId(tid){
+    const rows = document.querySelectorAll('#shipmentsTableBody tr, .shipment-table tbody tr');
+    for(const r of rows){
+      const idCell = r.querySelector('td,th');
+      if(!idCell) continue;
+      const strong = r.querySelector('td strong, th strong');
+      const txt = strong ? strong.textContent.trim().toUpperCase() : idCell.textContent.trim().toUpperCase();
+      if(txt.includes(tid.toUpperCase())) return r;
+    }
+    return null;
+  }
+
+  // Expose globally for existing buttons
+  window.openStatusPopup = function(trackingId){
+    currentEditId = trackingId || (document.getElementById('displayTrackingId')?.textContent || '').trim();
+    document.getElementById('statusFreeText').value = '';
+    document.getElementById('statusPopup').classList.add('active');
+  };
+  window.closeStatusPopup = function(){
+    document.getElementById('statusPopup').classList.remove('active');
+  };
+
+  window.setStatus = function(statusTitle, timelineText){
+    if(!currentEditId){ alert('No shipment selected'); return; }
+    const row = getRowByTrackingId(currentEditId);
+    // Update badge if a status cell exists
+    if(row){
+      // try to find the 5th cell (Status)
+      const cells = row.querySelectorAll('td');
+      const statusCell = cells.length >= 5 ? cells[4] : null;
+      if(statusCell){
+        let badgeClass = 'status-in-progress';
+        if(statusTitle==='Delivered') badgeClass='status-completed';
+        if(statusTitle==='Pending Booking') badgeClass='status-pending';
+        statusCell.innerHTML = `<span class="status-badge ${badgeClass}">${statusTitle}</span>`;
+      }
+    }
+
+    // Timeline on tracking page (if user is watching same ID)
+    const dispId = document.getElementById('displayTrackingId');
+    if(dispId && dispId.textContent.trim().toUpperCase() === currentEditId.toUpperCase()){
+      const tl = document.getElementById('trackingTimeline');
+      if(tl){
+        const wrap = document.createElement('div');
+        wrap.className = 'timeline-item';
+        wrap.innerHTML = `<div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">${new Date().toLocaleString()}</div>
+            <div class="timeline-title">${statusTitle}</div>
+            <div class="timeline-description">${timelineText}</div>
+          </div>`;
+        tl.prepend(wrap);
+      }
+      // Also update the status header
+      const st = document.getElementById('statusTitle');
+      const sd = document.getElementById('statusDescription');
+      if(st) st.textContent = statusTitle;
+      if(sd) sd.textContent = timelineText;
+    }
+
+    // WhatsApp message (short for Delivered)
+    // Try to read customer phone from the row's last known column; fallback to business number
+    let phone = '919338888550';
+    if(row){
+      const cells = row.querySelectorAll('td');
+      // Some layouts have phone column at index 5 (0-based), adjust if available
+      if(cells.length >= 6){
+        const possible = cells[5].textContent.trim();
+        if(/\d{10,14}/.test(possible.replace(/\D/g,''))) phone = possible.replace(/\D/g,'');
+      }
+    }
+    let msg = (statusTitle==='Delivered')
+      ? `Delivered ✅ – ${currentEditId}. Thank you for choosing A to Z Packers & Movers.`
+      : `Update for ${currentEditId}:\n${timelineText}\n— A to Z Packers & Movers 🚚`;
+    const url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
+
+    closeStatusPopup();
+  };
+
+  // Override editShipment(id) if present to open our popup
+  const originalEdit = window.editShipment;
+  window.editShipment = function(id){
+    try{ if(typeof originalEdit === 'function') originalEdit(id); }catch(e){}
+    openStatusPopup(id);
+  };
+
+  // Hook addNewShipment to open New Entry form
+  const originalAdd = window.addNewShipment;
+  window.addNewShipment = function(){
+    try{ if(typeof originalAdd === 'function') originalAdd(); }catch(e){}
+    openNewEntry();
+  };
+
+  // New Entry modal controls
+  window.openNewEntry = function(){ document.getElementById('newEntryModal').classList.add('active'); };
+  window.closeNewEntry = function(){ document.getElementById('newEntryModal').classList.remove('active'); };
+
+  function genTrackingId(){
+    const d = new Date();
+    const y = d.getFullYear();
+    const n = Math.floor(1000 + Math.random()*9000);
+    return `ATZ${y}${n}`;
+  }
+
+  window.saveNewEntry = function(e){
+    e.preventDefault();
+    const fd = new FormData(document.getElementById('newEntryForm'));
+    const f = Object.fromEntries(fd.entries());
+    const tid = genTrackingId();
+
+    // Insert a new row into any known shipments table body
+    const tbody = document.getElementById('shipmentsTableBody') || document.querySelector('.shipment-table tbody');
+    if(tbody){
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><strong>${tid}</strong></td>
+        <td>${f.custName}</td>
+        <td>${f.fromLoc} → ${f.toLoc}</td>
+        <td>${f.service||'-'}</td>
+        <td><span class="status-badge status-pending">Pending Booking</span></td>
+        <td>${new Date().toLocaleDateString()}</td>
+        <td>
+          <button onclick="editShipment('${tid}')" class="btn-action btn-edit"><i class="fas fa-pen-to-square"></i> Edit</button>
+          <button onclick="viewShipment && viewShipment('${tid}')" class="btn-action btn-view"><i class="fas fa-eye"></i> View</button>
+        </td>`;
+      // If table expects 7 columns differently (e.g., extra Date/Phone), we gracefully degrade.
+      tbody.prepend(tr);
+    }
+
+    // WhatsApp to party number
+    const hello = `Hello ${f.custName||'Customer'} 👋
+Your booking has been created with A to Z Packers & Movers.
+Tracking ID: ${tid}
+From: ${f.fromLoc} → ${f.toLoc}
+Pickup: ${f.pickupDate}
+Expected Delivery: ${f.expDelivery}
+Service: ${f.service}
+Driver: ${f.driverName||'-'} (${f.driverPhone||'-'})
+Vehicle: ${f.vehicleNo||'-'}
+Distance: ${f.km||'-'} KM
+Notes: ${f.special||'-'}
+Track anytime using your ID on our website.
+
+Thank you for trusting us! 🚚💨`;
+    const phone = (f.custPhone||'').replace(/^[+]/,'').replace(/\D/g,'');
+    if(phone.length>=10){
+      window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(hello),'_blank');
+    }
+
+    closeNewEntry();
+    return false;
+  };
+})();
+</script>
+
+
+<script>
+// ==== Tracking ID validator/normalizer (fixes "invalid" issue) ====
+(function(){
+  // Try common selectors for the tracking input
+  const input = document.querySelector('#trackingId, input[name="trackingId"], input[data-role="tracking"], input[id*="track"]');
+  if(!input) return;
+
+  function normalize(v){
+    return (v||'').toUpperCase().replace(/\s+/g,'').replace(/[^A-Z0-9]/g,'');
+  }
+  function isValid(tid){
+    // Accept ATZ + 8+ digits (e.g., ATZ20251234). Matches IDs generated by Admin panel.
+    return /^ATZ\d{4,12}$/.test(tid);
+  }
+  function clearInvalidUI(){
+    try{ input.setCustomValidity(''); }catch(e){}
+    const err = document.getElementById('trackingError');
+    if(err) err.style.display = 'none';
+    const help = document.querySelector('.tracking-error, .invalid-feedback');
+    if(help) help.style.display = 'none';
+  }
+
+  input.addEventListener('input', () => {
+    input.value = normalize(input.value);
+    clearInvalidUI();
+  });
+
+  const form = input.closest('form');
+  if(form){
+    form.addEventListener('submit', function(e){
+      const tid = normalize(input.value);
+      if(!isValid(tid)){
+        e.preventDefault();
+        alert('Please enter a valid Tracking ID like ATZ20251234');
+        return false;
+      }
+      // If our trackShipment exists, use it and prevent default form posting
+      if(typeof window.trackShipment === 'function'){
+        e.preventDefault();
+        const direct = document.getElementById('trackingId');
+        if(direct) direct.value = tid;
+        window.trackShipment();
+        return false;
+      }
+      // Otherwise let the page proceed (server/state may handle it)
+    }, true);
+  }
+})();
+</script>
+
+
+
+
+
+<script>
+(function(){
+  function normalize(v){ return (v||'').toUpperCase().replace(/\s+/g,'').replace(/[^A-Z0-9]/g,''); }
+  function looksValid(t){ return /^ATZ\d{4,12}$/.test(t); }
+
+  function ensureResultBox(){
+    let box = document.getElementById('trackBox') || document.getElementById('trackingResultBox');
+    if(!box){
+      const ref = document.querySelector('#trackingId')?.closest('.panel, .card, section, form') || document.body;
+      box = document.createElement('div');
+      box.id = 'trackingResultBox';
+      ref.appendChild(box);
+    }
+    // Replace with professional container each time
+    box.className = 'pro-trackbox';
+    box.innerHTML = `
+      <div class="pro-header">
+        <span id="statusBadge" class="pro-badge">In Transit</span>
+        <strong id="displayTrackingId" class="pro-id"></strong>
+      </div>
+      <div id="trackingTimeline" class="pro-timeline" aria-live="polite" aria-label="Shipment timeline"></div>
+    `;
+    return box;
+  }
+
+  function renderTimeline(tid){
+    const box = ensureResultBox();
+    box.querySelector('#displayTrackingId').textContent = tid;
+    const tl = box.querySelector('#trackingTimeline');
+    const now = new Date();
+    const items = [
+      {t:new Date(now.getTime()-1000*60*60*24).toLocaleString(), title:'Picked Up', desc:'Shipment collected from origin location'},
+      {t:new Date(now.getTime()-1000*60*60*6).toLocaleString(), title:'In Transit', desc:'Vehicle en route to destination hub'},
+      {t:new Date(now.getTime()-1000*60*60*1).toLocaleString(), title:'Hub Scan', desc:'Shipment scanned at destination hub'}
+    ];
+    tl.innerHTML = items.map(i => `
+      <div class="pro-step">
+        <div class="pro-dot"></div>
+        <div class="pro-time">${i.t}</div>
+        <div class="pro-title">${i.title}</div>
+        <div class="pro-desc">${i.desc}</div>
+      </div>
+    `).join('');
+
+    // Smooth scroll into view
+    box.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  // Rewire global function used by buttons
+  window.trackShipment = function(){
+    const inp = document.getElementById('trackingId') || document.querySelector('input[name="trackingId"]');
+    if(!inp){ return false; }
+    const tid = normalize(inp.value);
+    if(!looksValid(tid)){
+      alert('Please enter a valid Tracking ID like ATZ20251234');
+      return false;
+    }
+    renderTimeline(tid);
+    return false;
+  };
+
+  // Intercept form submits and "Track" buttons
+  const input = document.getElementById('trackingId') || document.querySelector('input[name="trackingId"]');
+  const form = input ? input.closest('form') : null;
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      window.trackShipment();
+      return false;
+    }, true);
+  }
+  document.querySelectorAll('button, a').forEach(el => {
+    const txt = (el.textContent||'').toLowerCase();
+    if(txt.includes('track')){
+      el.addEventListener('click', function(ev){
+        const nearestInput = document.getElementById('trackingId') || document.querySelector('input[name="trackingId"]');
+        if(nearestInput){
+          ev.preventDefault();
+          window.trackShipment();
+          return false;
+        }
+      }, true);
+    }
+  });
+})();
+</script>
+
+
+<!-- Immediate Action Required (will be moved under Business Hours dynamically) -->
+<div id="immediateActionBox" class="immediate-action" role="region" aria-live="polite" aria-label="Immediate Action Required">
+  <div class="immediate-action__inner">
+    <div class="immediate-action__icon">!</div>
+    <div class="immediate-action__content">
+      <div class="immediate-action__title">Immediate Action Required</div>
+      <div id="immediateActionMsg" class="immediate-action__msg">—</div>
+    </div>
+    <button class="immediate-action__close" onclick="hideImmediateAction()" aria-label="Close">Close</button>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  function findBusinessHoursAnchor(){
+    // Prefer an element with id
+    const byId = document.getElementById('businessHours') || document.querySelector('[data-section="business-hours"]');
+    if(byId) return byId;
+    // Search headings that contain "Business Hours"
+    const headings = document.querySelectorAll('h1,h2,h3,h4');
+    for(const h of headings){
+      const txt = (h.textContent||'').trim().toLowerCase();
+      if(txt.includes('business hours')){
+        // Use the parent card/panel/section if it exists
+        const block = h.closest('.panel, .card, section, .container, .content, .box');
+        return block || h;
+      }
+    }
+    // Fallback: contact section or footer
+    return document.getElementById('contact') || document.querySelector('footer') || document.body;
+  }
+
+  function anchorDialog(){
+    const box = document.getElementById('immediateActionBox');
+    if(!box) return;
+    const anchor = findBusinessHoursAnchor();
+    if(anchor && anchor.parentNode){
+      // Insert just after the anchor node
+      if(anchor.nextSibling){
+        anchor.parentNode.insertBefore(box, anchor.nextSibling);
+      }else{
+        anchor.parentNode.appendChild(box);
+      }
+    }
+  }
+
+  // Public APIs
+  window.showImmediateAction = function(message){
+    anchorDialog();
+    const box = document.getElementById('immediateActionBox');
+    const msg = document.getElementById('immediateActionMsg');
+    if(msg) msg.textContent = message || 'Please review the urgent update.';
+    if(box){
+      box.style.display = 'block';
+      // Gentle focus for accessibility
+      setTimeout(()=>{ box.scrollIntoView({behavior:'smooth', block:'start'}); }, 50);
+    }
+  };
+  window.hideImmediateAction = function(){
+    const box = document.getElementById('immediateActionBox');
+    if(box) box.style.display = 'none';
+  };
+
+  // Optional: if a global flag exists, auto-show
+  if(window.__triggerImmediateActionOnce){
+    window.showImmediateAction(typeof window.__triggerImmediateActionOnce === 'string' ? window.__triggerImmediateActionOnce : '');
+    window.__triggerImmediateActionOnce = null;
+  }
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+/* === Admin ↔ Homepage Live Sync (7-day retention, de-dup, auto-refresh) === */
+(function(){
+  const KEY = 'atz_shipments_store_v1';
+  const RETAIN_MS = 7*24*60*60*1000;
+
+  function loadStore(){
+    try{ return JSON.parse(localStorage.getItem(KEY)) || {shipments:{}}; }
+    catch(e){ return {shipments:{}}; }
+  }
+  function saveStore(s){ localStorage.setItem(KEY, JSON.stringify(s)); }
+
+  function norm(s){ return (s||'').toString().trim().replace(/\s+/g,' ').toLowerCase(); }
+  function prune7dTimeline(tl){
+    const cutoff = Date.now() - RETAIN_MS;
+    return (tl||[]).filter(i => {
+      const t = new Date(i.time).getTime();
+      return !isNaN(t) && t >= cutoff;
+    });
+  }
+  function getShipment(id){
+    const s = loadStore();
+    return s.shipments[id];
+  }
+  function setShipment(id,data){
+    const s = loadStore();
+    data.timeline = prune7dTimeline(data.timeline||[]);
+    s.shipments[id] = data;
+    saveStore(s);
+  }
+
+  // Keep track of current edit id from Admin
+  (function hookOpenStatus(){
+    const orig = window.openStatusPopup;
+    window.openStatusPopup = function(trackingId){
+      if(trackingId){ window.currentEditId = String(trackingId).trim().toUpperCase(); }
+      try{ if(typeof orig === 'function') orig.apply(this, arguments); }catch(e){}
+    };
+    // Infer id on Edit button clicks
+    document.addEventListener('click', function(e){
+      const btn = e.target.closest('button');
+      if(!btn) return;
+      if(/edit/i.test(btn.textContent||'') && btn.closest('tr')){
+        const row = btn.closest('tr');
+        const id = (row.querySelector('strong')?.textContent || row.cells?.[0]?.textContent || '').trim().toUpperCase();
+        if(id) window.currentEditId = id;
+      }
+    }, true);
+  })();
+
+  // Strong de-dup in setStatus
+  (function(){
+    const orig = window.setStatus;
+    window.setStatus = function(statusTitle, timelineText){
+      let tid = (window.currentEditId||'').trim().toUpperCase();
+      if(!tid){
+        const row = document.querySelector('#shipmentsTableBody tr.selected, #shipmentsTableBody tr.editing');
+        tid = (row && (row.querySelector('strong')?.textContent || row.cells?.[0]?.textContent) || '').trim().toUpperCase();
+      }
+      if(tid){
+        const ship = getShipment(tid) || {id: tid, status:'', timeline: []};
+        const last = ship.timeline && ship.timeline[0];
+        const newTitleN = norm(statusTitle);
+        const lastTitleN = norm(last?.title);
+        // Skip if same status as last
+        if(!(newTitleN && newTitleN === lastTitleN)){
+          ship.timeline.unshift({time: new Date().toLocaleString(), title: statusTitle, desc: timelineText});
+        }
+        ship.status = statusTitle;
+        setShipment(tid, ship);
+        // Broadcast to other tabs (manually trigger storage listeners)
+        try{ localStorage.setItem('__atz_ping__', String(Date.now())); }catch(e){}
+        repaintVisibleTimeline(tid);
+      }
+      try{ return orig.apply(this, arguments); }catch(e){}
+    };
+  })();
+
+  // Render function for tracking UI
+  function ensureResultBox(){
+    let box = document.getElementById('trackBox') || document.getElementById('trackingResultBox');
+    if(!box){
+      const ref = document.querySelector('#trackingId')?.closest('.panel, .card, section, form') || document.body;
+      box = document.createElement('div');
+      box.id = 'trackingResultBox';
+      ref.appendChild(box);
+    }
+    box.className = 'pro-trackbox';
+    if(!box.innerHTML.trim()){
+      box.innerHTML = `
+        <div class="pro-header">
+          <span id="statusBadge" class="pro-badge">In Transit</span>
+          <strong id="displayTrackingId" class="pro-id"></strong>
+        </div>
+        <div id="trackingTimeline" class="pro-timeline" aria-live="polite" aria-label="Shipment timeline"></div>
+      `;
+    }
+    return box;
+  }
+  function renderFromStore(tid){
+    const data = getShipment(tid);
+    const box = ensureResultBox();
+    const showId = box.querySelector('#displayTrackingId');
+    const tl = box.querySelector('#trackingTimeline');
+    if(showId) showId.textContent = tid;
+    if(!tl) return;
+    if(!data){
+      tl.innerHTML = `<div class="pro-step"><div class="pro-dot"></div><div class="pro-title">No events yet</div><div class="pro-desc">Once the admin updates your shipment, they will appear here.</div></div>`;
+      return;
+    }
+    const st = document.getElementById('statusTitle');
+    const sd = document.getElementById('statusDescription');
+    if(st && data.status) st.textContent = data.status;
+    if(sd && data.timeline && data.timeline[0]) sd.textContent = data.timeline[0].desc || '';
+    tl.innerHTML = (data.timeline||[]).map(i=>`
+      <div class="pro-step">
+        <div class="pro-dot"></div>
+        <div class="pro-time">${i.time||''}</div>
+        <div class="pro-title">${i.title||''}</div>
+        <div class="pro-desc">${i.desc||''}</div>
+      </div>
+    `).join('');
+  }
+  function repaintVisibleTimeline(tid){
+    const disp = document.getElementById('displayTrackingId');
+    const seen = (disp ? disp.textContent : '').trim().toUpperCase();
+    if(!tid) tid = seen;
+    if(!tid) return;
+    renderFromStore(tid);
+  }
+
+  // Hook trackShipment to display data from store
+  (function(){
+    const origT = window.trackShipment;
+    function normalize(v){ return (v||'').toUpperCase().replace(/\s+/g,'').replace(/[^A-Z0-9]/g,''); }
+    function looksValid(t){ return /^ATZ\d{4,12}$/.test(t); }
+    window.trackShipment = function(){
+      const inp = document.getElementById('trackingId') || document.querySelector('input[name="trackingId"]');
+      if(!inp){ return false; }
+      const tid = normalize(inp.value);
+      if(!looksValid(tid)){
+        alert('Please enter a valid Tracking ID like ATZ20251234');
+        return false;
+      }
+      // Render from store, then call original (if it adds demo steps etc., ours will override on next repaint)
+      renderFromStore(tid);
+      if(origT){ try{ origT.apply(this, arguments); }catch(e){} }
+      // Smooth scroll
+      const box = document.getElementById('trackingResultBox') || document.getElementById('trackBox');
+      if(box) box.scrollIntoView({behavior:'smooth', block:'start'});
+      return false;
+    };
+  })();
+
+  // Auto-refresh: listen for storage changes and poll every 5s
+  window.addEventListener('storage', function(e){
+    if(e.key === KEY || e.key === '__atz_ping__'){
+      repaintVisibleTimeline();
+    }
+  });
+  setInterval(repaintVisibleTimeline, 5000);
+
+  // Initial prune + optional auto-render if an ID is already displayed
+  (function init(){
+    // prune old
+    const s = loadStore();
+    Object.keys(s.shipments).forEach(id => {
+      s.shipments[id].timeline = prune7dTimeline(s.shipments[id].timeline||[]);
+    });
+    saveStore(s);
+    // paint if a display id exists
+    const disp = document.getElementById('displayTrackingId');
+    if(disp && disp.textContent.trim()){
+      repaintVisibleTimeline(disp.textContent.trim().toUpperCase());
+    }
+  })();
+})();
+</script>
+
+</body>
+</html>
