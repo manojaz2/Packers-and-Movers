@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>A to Z Packers & Movers — Live Tracking</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f6f7fb; --card:#ffffff; --ink:#0f172a; --muted:#64748b;
+      --ok:#166534; --danger:#7f1d1d; --brand:#0b3a8d; --line:#e5e7eb;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);font:16px/1.5 Inter,system-ui,Segoe UI,Roboto,Arial;color:var(--ink)}
+    .wrap{max-width:900px;margin:24px auto;padding:0 14px}
+    .brand{background:var(--brand);color:#fff;border-radius:16px;padding:18px 20px;margin-bottom:20px}
+    h1{margin:0;font-size:22px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:18px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    .row{display:grid;gap:12px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:720px){.grid2{grid-template-columns:1fr}}
+    label{font-size:13px;color:var(--muted);font-weight:600}
+    input,select{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font:inherit}
+    button{appearance:none;border:0;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}
+    .ok{background:var(--ok);color:#fff}
+    .danger{background:var(--danger);color:#fff}
+    .muted{color:var(--muted)}
+    .title{font-weight:700;font-size:18px;margin:0 0 8px}
+    .pill{font-size:12px;background:#eef2ff;border:1px solid #dbe3ff;color:#27346a;border-radius:999px;padding:4px 10px}
+    .timeline{position:relative;margin-top:6px;padding-left:10px}
+    .timeline:before{content:"";position:absolute;left:16px;top:2px;bottom:2px;width:2px;background:#c7d2fe}
+    .ti{position:relative;margin:10px 0 10px 14px;padding-left:14px}
+    .ti:before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:#1d4ed8}
+    footer{margin:24px 0;text-align:center;color:var(--muted);font-size:13px}
+    .hide{display:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">
+      <h1>🚚 A to Z Packers & Movers — Live Tracking</h1>
+      <div style="font-size:13px;opacity:.9">Simple • Professional • Fast</div>
+    </div>
+
+    <!-- ADMIN AREA (hidden unless URL has #admin) -->
+    <div id="adminArea" class="hide">
+      <!-- LOGIN -->
+      <div class="card">
+        <p class="title">🔑 Admin Login</p>
+        <div class="row">
+          <label>Email</label>
+          <input id="email" type="email" value="manojgatibbi506@gmail.com"/>
+          <label>Password</label>
+          <input id="password" type="password" placeholder="••••••••"/>
+          <div class="grid2">
+            <button id="btnSignIn" class="ok">Sign In</button>
+            <button id="btnSignOut" class="danger">Sign Out</button>
+          </div>
+          <div id="loginState" class="muted">Not signed in</div>
+        </div>
+      </div>
+
+      <!-- CREATE ORDER -->
+      <div class="card">
+        <p class="title">🧰 Admin Panel — Create New Order</p>
+        <div class="grid2">
+          <div>
+            <label>Customer Name</label>
+            <input id="name" placeholder="Full name">
+          </div>
+          <div>
+            <label>Contact</label>
+            <input id="contact" placeholder="+91 98xxxxxxx">
+          </div>
+        </div>
+        <div class="grid2" style="margin-top:10px">
+          <div>
+            <label>From (pickup city)</label>
+            <input id="from" placeholder="Origin">
+          </div>
+          <div>
+            <label>To (destination)</label>
+            <input id="to" placeholder="Destination">
+          </div>
+        </div>
+        <div class="grid2" style="margin-top:10px">
+          <div>
+            <label>Total number of items</label>
+            <input id="items" type="number" min="1" placeholder="e.g. 12">
+          </div>
+          <div>
+            <label>Expected Delivery Date</label>
+            <input id="edd" type="date">
+          </div>
+        </div>
+        <div class="grid2" style="margin-top:10px">
+          <div>
+            <label>Tracking ID (auto)</label>
+            <input id="newTid" readonly>
+          </div>
+          <div style="display:flex;align-items:end;gap:12px">
+            <button id="btnCreate" class="ok" style="width:100%">Save New Entry (Booked)</button>
+          </div>
+        </div>
+        <div id="createNote" class="muted"></div>
+      </div>
+
+      <!-- ADD NEXT STATUS -->
+      <div class="card">
+        <p class="title">⚡ Quick Status Update</p>
+        <div class="grid2">
+          <div>
+            <label>Tracking ID</label>
+            <input id="updTid" placeholder="e.g. AZ250821-8226"/>
+          </div>
+          <div>
+            <label>Next Status (auto)</label>
+            <input id="nextStatus" readonly/>
+          </div>
+        </div>
+        <div class="row" id="locRow" style="margin-top:10px;display:none">
+          <div>
+            <label>Location / Note (for Destination In / Out)</label>
+            <input id="locNote" placeholder="e.g. Cuttack Hub, Palam Gate">
+          </div>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <button id="btnAddNext" class="ok">Add Next Status</button>
+          <div id="updNote" class="muted"></div>
+        </div>
+      </div>
+    </div><!-- /adminArea -->
+
+    <!-- PUBLIC TRACK -->
+    <div class="card">
+      <p class="title">📦 Track Your Shipment</p>
+      <label>Enter Tracking ID</label>
+      <input id="trackInput" placeholder="AZ250821-8226"/>
+      <button id="btnTrack" class="ok" style="margin-top:10px">Track Now</button>
+
+      <div id="result" class="row" style="margin-top:14px;display:none">
+        <div class="grid2" style="align-items:center">
+          <div>
+            <div id="rName" style="font-weight:700;font-size:18px">-</div>
+            <div id="rContact" class="muted">-</div>
+          </div>
+          <div style="text-align:right">
+            <span id="rTid" class="pill">-</span>
+            <!-- Overdue badge (hidden by default) -->
+            <span id="overdueBadge" class="pill" style="background:#ffe2e2;color:#7f1d1d;display:none;margin-left:6px">Overdue Delivery</span>
+          </div>
+        </div>
+        <div class="muted" id="rRoute" style="margin-top:6px">-</div>
+        <div class="muted" id="rMeta" style="margin-top:6px">-</div>
+        <div class="timeline" id="rTimeline"></div>
+      </div>
+      <div id="noResult" class="muted" style="display:none;margin-top:10px">No shipment found.</div>
+    </div>
+
+    <footer>© A to Z Packers & Movers • Firestore Live Tracking</footer>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, serverTimestamp, Timestamp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAOCeCbqVvki8LN0LLQFNkLOwEoYer3EKQ",
+      authDomain: "a-to-z-packers-tracking-live.firebaseapp.com",
+      projectId: "a-to-z-packers-tracking-live",
+      storageBucket: "a-to-z-packers-tracking-live.firebasestorage.app",
+      messagingSenderId: "719198128823",
+      appId: "1:719198128823:web:d7ef4235dda458ff375b32",
+      measurementId: "G-B4KR2RETYR"
+    };
+
+    const app   = initializeApp(firebaseConfig);
+    const auth  = getAuth(app);
+    const db    = getFirestore(app);
+
+    const $ = s => document.querySelector(s);
+    const adminArea = $("#adminArea");
+    // show admin only if URL has #admin
+    if (location.hash === "#admin") adminArea.classList.remove("hide");
+    window.addEventListener("hashchange", ()=> {
+      if (location.hash === "#admin") adminArea.classList.remove("hide");
+      else adminArea.classList.add("hide");
+    });
+
+    const format = ts => {
+      try {
+        const d = ts?.toDate ? ts.toDate() : (typeof ts === "number" ? new Date(ts) : new Date());
+        return d.toLocaleString();
+      } catch { return "-"; }
+    };
+    const formatDate = ts => {
+      try {
+        const d = ts?.toDate ? ts.toDate() : new Date(ts);
+        return d.toLocaleDateString();
+      } catch { return "-"; }
+    };
+
+    const FLOW = [
+      "Booked","Picked Up","In Transit",
+      "Destination In","Destination Out",
+      "Out for Delivery","Delivered"
+    ];
+
+    // Auth UI (only if admin visible)
+    if (!adminArea.classList.contains("hide")) {
+      onAuthStateChanged(auth, (user) => {
+        $("#loginState").textContent = user ? `Signed in as ${user.email}` : "Not signed in";
+      });
+
+      $("#btnSignIn").onclick = async () => {
+        const email = $("#email").value.trim();
+        const pass  = $("#password").value.trim();
+        try{
+          await signInWithEmailAndPassword(auth, email, pass);
+          alert("Signed in successfully!");
+        }catch(e){ alert(e.message); }
+      };
+      $("#btnSignOut").onclick = async () => {
+        try{ await signOut(auth); alert("Signed out."); }catch(e){ alert(e.message); }
+      };
+    }
+
+    // Helpers
+    function makeTid(){
+      const now = new Date();
+      const dd = String(now.getDate()).padStart(2,"0");
+      const mm = String(now.getMonth()+1).padStart(2,"0");
+      const yy = String(now.getFullYear()).slice(-2);
+      const rand = Math.floor(1000 + Math.random()*9000);
+      return `AZ${dd}${mm}${yy}-${rand}`;
+    }
+    const newTid = $("#newTid"); if (newTid) newTid.value = makeTid();
+
+    // Create Order
+    $("#btnCreate")?.addEventListener("click", async ()=>{
+      const user = auth.currentUser;
+      if(!user){ alert("Please sign in first."); return; }
+
+      const tid = $("#newTid").value.trim();
+      const name = $("#name").value.trim() || "-";
+      const contact = $("#contact").value.trim() || "-";
+      const from = $("#from").value.trim() || "-";
+      const to = $("#to").value.trim() || "-";
+      const items = parseInt($("#items").value || "0", 10) || 0;
+      const eddVal = $("#edd").value;
+      const eddTs = eddVal ? Timestamp.fromDate(new Date(eddVal + "T12:00:00")) : null;
+
+      try{
+        await setDoc(doc(db, "Orders", tid), {
+          Name: name,
+          Contact: contact,
+          From: from,
+          To: to,
+          Items: items,
+          EDD: eddTs,
+          Status: [{ Text: "Booked", Ts: serverTimestamp() }]
+        });
+        $("#createNote").textContent = `Created order ${tid}`;
+        $("#updTid").value = tid;
+        await computeNextStatus();
+        alert("Order saved with Tracking ID: " + tid);
+        $("#newTid").value = makeTid();
+      }catch(e){ alert("Save failed: " + e.message); }
+    });
+
+    // Compute next status
+    async function computeNextStatus(){
+      const tid = ($("#updTid")?.value || "").trim();
+      if(!tid){ $("#nextStatus").value = ""; $("#locRow").style.display="none"; return; }
+
+      const ref = doc(db, "Orders", tid);
+      const snap = await getDoc(ref);
+      if(!snap.exists()){ $("#nextStatus").value = ""; $("#locRow").style.display="none"; return; }
+
+      const data = snap.data() || {};
+      const texts = (data.Status || []).map(s=>s.Text);
+      let idx = -1;
+      for(let i=0;i<FLOW.length;i++){
+        if(texts.includes(FLOW[i])) idx = i; else break;
+      }
+      const delivered = texts.includes("Delivered");
+      const next = delivered ? "Delivered (complete)" : FLOW[Math.min(idx+1, FLOW.length-1)];
+      $("#nextStatus").value = next;
+
+      const needsLoc = next === "Destination In" || next === "Destination Out";
+      $("#locRow").style.display = needsLoc ? "" : "none";
+      if (!needsLoc) $("#locNote").value = "";
+    }
+    $("#updTid")?.addEventListener("input", computeNextStatus);
+
+    // Add Next Status
+    $("#btnAddNext")?.addEventListener("click", async ()=>{
+      const user = auth.currentUser;
+      if(!user){ alert("Please sign in first."); return; }
+
+      const tid = $("#updTid").value.trim();
+      if(!tid){ alert("Enter Tracking ID."); return; }
+
+      const ref = doc(db, "Orders", tid);
+      const snap = await getDoc(ref);
+      if(!snap.exists()){ alert("No such order."); return; }
+
+      const data = snap.data() || {};
+      const texts = (data.Status || []).map(s=>s.Text);
+      if(texts.includes("Delivered")){ alert("Already delivered. No further updates."); return; }
+
+      let pos = -1;
+      for(let i=0;i<FLOW.length;i++){
+        if(texts.includes(FLOW[i])) pos = i; else break;
+      }
+      const next = FLOW[pos+1] || "Delivered";
+
+      let label = next;
+      if (next === "Destination In" || next === "Destination Out"){
+        const note = ($("#locNote").value || "").trim();
+        if (note) label = `${next} — ${note}`;
+      }
+
+      try{
+        await updateDoc(ref, { Status: arrayUnion({ Text: label, Ts: serverTimestamp() }) });
+        $("#updNote").textContent = `Added "${label}" at ${new Date().toLocaleString()}`;
+        alert("Status added.");
+        await computeNextStatus();
+      }catch(e){ alert("Update failed: " + e.message); }
+    });
+
+    // Public Track
+    $("#btnTrack").addEventListener("click", async ()=>{
+      const tid = $("#trackInput").value.trim();
+      if(!tid){ alert("Enter Tracking ID."); return; }
+
+      try{
+        const ref = doc(db, "Orders", tid);
+        const snap = await getDoc(ref);
+        if(!snap.exists()){
+          $("#result").style.display = "none";
+          $("#noResult").style.display = "";
+          return;
+        }
+        $("#noResult").style.display = "none";
+        const d = snap.data();
+
+        $("#rName").textContent    = d.Name || "-";
+        $("#rContact").textContent = d.Contact || "-";
+        $("#rTid").textContent     = tid;
+        $("#rRoute").textContent   = `${d.From || "-"} → ${d.To || "-"}`;
+
+        const items = (d.Status || []).slice().sort((a,b)=>{
+          const ta = a.Ts?.seconds || 0, tb = b.Ts?.seconds || 0;
+          return ta - tb;
+        });
+
+        // Meta line
+        const meta = [];
+        if (d.Items) meta.push(`Items: ${d.Items}`);
+        if (d.EDD)   meta.push(`Expected Delivery: ${formatDate(d.EDD)}`);
+        $("#rMeta").textContent = meta.length ? meta.join(" • ") : "";
+
+        // Overdue badge check (show only if not delivered and past EDD)
+        const overdueBadge = $("#overdueBadge");
+        const delivered = items.some(s => (s.Text||"").includes("Delivered"));
+        if (d.EDD && !delivered) {
+          try {
+            const eddDate = d.EDD.toDate ? d.EDD.toDate() : new Date(d.EDD);
+            const today = new Date();
+            today.setHours(0,0,0,0);
+            const endOfEdd = new Date(eddDate);
+            endOfEdd.setHours(23,59,59,999);
+            overdueBadge.style.display = (today > endOfEdd) ? "" : "none";
+          } catch {
+            overdueBadge.style.display = "none";
+          }
+        } else {
+          overdueBadge.style.display = "none";
+        }
+
+        // Timeline
+        const tl = $("#rTimeline");
+        tl.innerHTML = "";
+        items.forEach(s=>{
+          const div = document.createElement("div");
+          div.className = "ti";
+          div.innerHTML = `<div style="font-weight:600">${s.Text}</div>
+                           <div class="muted">${format(s.Ts)}</div>`;
+          tl.appendChild(div);
+        });
+
+        $("#result").style.display = "";
+      }catch(e){
+        alert("Load failed: " + e.message);
+      }
+    });
+
+    // Prime next-status if admin visible
+    if (!adminArea.classList.contains("hide")) computeNextStatus();
+  </script>
+</body>
+</html>
